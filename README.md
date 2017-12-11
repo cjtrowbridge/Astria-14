@@ -1,7 +1,12 @@
 # Astria-14
-Astria is a simple and secure web application framework.
+A simple and secure web application framework.
 
-Astria understands databases, and generates 
+Astria understands databases, and generates procedural pages for interacting with data. These pages can be replaced with your own, or left as they are.
+
+Astria manages your users. It authenticates them and gives you access to their data simply. It even manages user permissions for you at scale.
+
+Speaking of scale, Astria can scale to handle very large workloads or serve just one or two users. Today, it is managing multi-million-dollar companies, and home media servers. 
+
 
 ## Goals with this version
 
