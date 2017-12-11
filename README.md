@@ -5,7 +5,7 @@ Astria understands databases, and generates procedural pages for interacting wit
 
 Astria manages your users. It authenticates them and gives you access to their data simply. It even manages user permissions for you at scale.
 
-Speaking of scale, Astria can scale to handle very large workloads or serve just one or two users. Today, it is managing multi-million-dollar companies, and home media servers. 
+Speaking of scale, Astria can scale to handle very large workloads or serve just one or two users. It has been in continuous development since 2001, and today it is managing everything from multi-million-dollar companies to home media servers. 
 
 
 ## Goals with this version
