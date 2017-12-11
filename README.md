@@ -10,7 +10,7 @@ Astria understands databases, and generates
 -Events include routes as an optional parameter  
 -Schema definition stored in memory  
 
-Data Goals;
+Data Goals;  
 -All queries stored in memory with past results for 24 hours  
 -Previous data is delivered with page  
 -Fresh data in views is queried asynchronously from page  
