@@ -1,12 +1,16 @@
 # Astria-14
 Astria is a simple and secure web application framework.
 
-Goals
--Minimized core, and all included in the main class
--More plugins; only the minimum features are included in the core
--More object-oriented
--Automated regular remote data-source fetching and local storage included in core
--Draupnr available as "Smith" plugin
--Included extensions and auth options are managed in the config file rather than in the index file so the index can be updated without losing changes.
--Main files are deprecated
--Automatically subscribe to CronPUT at setup
+Astria understands databases, and generates 
+
+## Goals with this version
+
+-OAuth only for all logins
+-SchemaRouter is default view for all routes
+-Events include routes as an optional parameter
+-Schema definition stored in memory
+
+Data Goals;
+-All queries stored in memory with past results for 24 hours
+-Previous data is delivered with page
+-Fresh data in views is queried asynchronously from page
