@@ -39,8 +39,12 @@ class Legba{
   }
   public function RequireSSL(){
     //If the current path is not an SSL path, then redirect to an SSL version of the current path.
-    
-    return false;
+    if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on'){
+      header("Status: 301 Moved Permanently");
+      header(sprintf('Location: https://%s%s',$_SERVER['HTTP_HOST'],$_SERVER['REQUEST_URI']));
+      exit();
+    }
+    return true;
   }
   
 }
