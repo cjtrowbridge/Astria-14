@@ -40,6 +40,19 @@ class Legba{
   
   
   //Static Functions
+  public static function BlowfishEncrypt($pure_string, $encryption_key=null){
+    $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+    $encrypted_string = base64_encode(mcrypt_encrypt(MCRYPT_BLOWFISH, $encryption_key, utf8_encode($pure_string), MCRYPT_MODE_ECB, $iv));
+    return $encrypted_string;
+  }
+  public static function BlowfishDecrypt($encrypted_string, $Key = null){
+    $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+    $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, $encryption_key, base64_decode($encrypted_string), MCRYPT_MODE_ECB, $iv);
+    $decrypted_string = iconv(mb_detect_encoding($decrypted_string, mb_detect_order(), true), "UTF-8", $decrypted_string);
+    return $decrypted_string;
+  }
   public static function pd($Input){
     echo '<pre>';
     var_dump($Input);
@@ -102,6 +115,7 @@ class Legba{
     return $return;
   }
   //TODO try using json instead of serialize and see if that is more managable. I have the feeling that serialize might not be the most elegant and robust long-term solution. 
+  //TODO add functionality for blowfishing these.
   public function Config($File, $Key){
     //Assume these config files contain valid associative arrays. Return the specified element in the first dimension of the array.
     $this->Event('Loading Config File: "'.$File.'" and Key "'.$Key.'"');
