@@ -159,6 +159,7 @@ class Legba{
     }
   }
   public function DeleteConfig($File, $Key){
+    $this->BackupConfig($File);
     $this->Event('Deleting Key From Config File: "'.$File.'" and Key "'.$Key.'"');
     //Delete the given key from the given file. Return true or false regarding success of saving new version.
     
@@ -183,6 +184,7 @@ class Legba{
     }
   }
   public function SaveConfig($File, $Key, $NewValue){
+    $this->BackupConfig($File);
     $this->Event('Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     //Set the given key to the given value in the given file. Return true or false regarding success of saving.
     
