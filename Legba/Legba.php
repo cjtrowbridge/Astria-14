@@ -172,7 +172,7 @@ class Legba{
       $this->MayI('Verbose')&&
       isset($_GET['verbose'])
     ){
-      echo '<h4 title="'.var_export($EventDebug,true).'">Event: "'.$Name.'"</h4>';
+      echo '<h4 title="'.str_replace('"',"'",var_export($EventDebug,true)).'">Event: "'.$Name.'"</h4>';
     }
     
     //Hook a callback onto an event name or trigger the callbacks associated with the event name.
