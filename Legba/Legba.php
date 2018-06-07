@@ -12,20 +12,21 @@ class Legba{
     $this->ThreadID = Legba::sha256(uniqid(true));
     
     //Set up initial debug array.
+    $RAM  = round(memory_get_usage()/1000000,4);
+    $Time = round(microtime(true),4);
     $this->Debug = array(
       0=>array(
-        'Description'=> 'Legba Constructor',
-        'RAM'        => (memory_get_usage()/1000000),
-        'Delta-RAM'  => 0,
-        'Time'       => round(microtime(true),4),
-        'Delta-Time' => 0
+        'Index'       => 0,
+        'Description' => 'Legba Constructor',
+        'RAM'         => $RAM,
+        'Delta-RAM'   => 0,
+        'Time'        => $Time,
+        'Delta-Time'  => 0
       )
     );
     
     //Create initial empty events list.
-    $this->Events = array(
-      
-    );
+    $this->Events = array();
     
   }
   function __destruct(){
@@ -68,8 +69,34 @@ class Legba{
     return false;
   }
   public function Event($Name, $Callback = false){
-    //Hook a callback onto an event name or trigger the callbacks associated with the event name.
     
+    //Fetch previous data for comparison.
+    $Previous = $this->Debug[(count($this->Debug)-1)];
+    
+    //Calculate debug information.
+    $RAM  = round(memory_get_usage()/1000000,4);
+    $Time = round(microtime(true),4);
+    
+    //Add debug information to thread log.
+    $EventDebug = array(
+      'Index'       => ($Previous['Index'] + 1),
+      'Description' => $Name,
+      'RAM'         => $RAM,
+      'Delta-RAM'   => ($RAM  - $Previous['RAM']),
+      'Time'        => $Time,
+      'Delta-Time'  => ($Time - $Previous['Time'])
+    );
+    $This->Debug[]=$EventDebug;
+    
+    //Output verbose event information if permitted and requested.
+    if(
+      MayI('Verbose')&&
+      isset($_GET['verbose'])
+    ){
+      echo '<h4 title="'.var_export($EventDebug,true).'">Event: "'.$Name.'"</h4>';
+    }
+    
+    //Hook a callback onto an event name or trigger the callbacks associated with the event name.
     if($Callback == false){
       //Trigger the callbacks hooked to a particular event name
       if(isset($this->Events[$Name])){
