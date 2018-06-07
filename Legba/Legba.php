@@ -54,7 +54,7 @@ class Legba{
   
   //Accessor/Mutator Functions
   //TODO make the default variables for this come from a config setting.
-  public function ArrTabler($Array, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
+  public function ArrTabler($arr, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
     $return='';
     if($table_id==null){
       $table_id=md5(uniqid(true));
