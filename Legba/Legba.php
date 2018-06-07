@@ -53,6 +53,53 @@ class Legba{
   
   
   //Accessor/Mutator Functions
+  //TODO make the default variables for this come from a config setting.
+  public function ArrTabler($Array, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
+    $return='';
+    if($table_id==null){
+      $table_id=md5(uniqid(true));
+    }
+    if(count($arr)>0){
+      $return.="\n<div class=\"table-responsive\">\n";
+      $return.= "\r\n".'	<table id="'.$table_id.'" class=" table'.$table_class.'">'."\n";
+      $first=true;
+      foreach($arr as $row){
+        if($first){
+          $return.= "		<thead>\n";
+          $return.= "			<tr>\n";
+          foreach($row as $key => $value){
+            $return.= "				<th>".ucwords($key)."</th>\n";
+          }
+          $return.= "			</tr>\n";
+          $return.= "		</thead>\n";
+          $return.= "		<tbody>\n";
+        }
+        $first=false;
+        $return.= "			<tr>\n";
+        foreach($row as $key => $value){
+          if($OutputCallback == false){
+            $return.="<td>".$value."</td>";  
+          }else{
+            //TODO i dont think this will work like this but i dont need it to work at this point
+            $return.="<td>".$OutputCallback($key, $value,$row)."</td>";
+          }
+
+        }
+        $return.= "			</tr>\n";
+      }
+      $return.= "		</tbody>\n";
+      $return.= "	</table>\n";
+      $return.= "</div>\n";
+      if($Sort){
+        $return.= "<script>$('#".$table_id."').tablesorter({widgets: ['zebra', 'filter']});</script>\n";
+      }else{
+        $return.= "<script>$('#".$table_id."').tablesorter({widgets: ['zebra']});</script>\n";
+      }
+    }else{
+      $return.="No Results Found.";
+    }
+    return $return;
+  }
   public function Config($File, $Key, $Value = '9BDUo49XFN54CMaIfQOb4Cd2PB8BmZwZQ3ktFhXj1i9Tz8u7cTiKvRt526Tzo5QQ'){
     //Obfuscated default parameter is designed to allow passing of values like null, false, etc.
     
@@ -131,6 +178,17 @@ class Legba{
         fail('<h1>Event Description Must Be A String;</h1><pre>'.var_export($EventDescription,true).'</pre>');
       }
     }
+    
+    if(strtolower($Name) == 'end'){
+      //This is an important failure state so we will potentially dump extra debug information.
+      if(
+        $this->MayI('Verbose')&&
+        isset($_GET['verbose'])
+      ){
+        $this->ShowDebugSummary();
+      }
+    }
+    
     return false;
   }
   public function Load($Directory = false){
@@ -162,6 +220,10 @@ class Legba{
       default: 
         return false;
     }
+  }
+  public function ShowDebugSummary(){
+    echo '<h4>Debug Summary</h4>';
+    echo $this->ArrTabler($This->Debug);
   }
   
 }
