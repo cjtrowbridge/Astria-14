@@ -129,9 +129,9 @@ class Legba{
       'Index'       => ($Previous['Index'] + 1),
       'Description' => $Name,
       'RAM'         => $RAM,
-      'Delta-RAM'   => ($RAM  - $Previous['RAM']),
+      'Delta-RAM'   => round($RAM  - $Previous['RAM'],4),
       'Time'        => $Time,
-      'Delta-Time'  => ($Time - $Previous['Time'])
+      'Delta-Time'  => round($Time - $Previous['Time'],4)
     );
     $this->Debug[]=$EventDebug;
     
