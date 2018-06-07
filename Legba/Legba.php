@@ -5,6 +5,7 @@ class Legba{
   private $ThreadID = false;
   private $Debug    = false;
   private $Events   = false;
+  private $User     = false;
   
   //Native class primitives
   function __construct(){
@@ -53,7 +54,7 @@ class Legba{
   
   
   //Accessor/Mutator Functions
-  //TODO make the default variables for this come from a config setting.
+  //TODO make the default table arguments come from a config setting.
   public function ArrTabler($arr, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
     $return='';
     if($table_id==null){
@@ -100,20 +101,42 @@ class Legba{
     }
     return $return;
   }
-  public function Config($File, $Key, $Value = '9BDUo49XFN54CMaIfQOb4Cd2PB8BmZwZQ3ktFhXj1i9Tz8u7cTiKvRt526Tzo5QQ'){
-    //Obfuscated default parameter is designed to allow passing of values like null, false, etc.
-    
-    if($Value == '9BDUo49XFN54CMaIfQOb4Cd2PB8BmZwZQ3ktFhXj1i9Tz8u7cTiKvRt526Tzo5QQ'){
-      //Search for key's current value in specified file. Return it or null.
+  public function Config($File, $Key){
+    //Assume these config files contain valid associative arrays. Return the specified element in the first dimension of the array.
       
-      
+    //Load the file into a variable. 
+    if(file_exists($File)){
+      include($File);
     }else{
-      //Set the given key to the given value in the given file. Return true or false regarding ability to save.
-      
-      
+      return false;
     }
     
-    return false;
+    //If the specified key exists, then return it, otherwise return false. This means non-present values will return as false.
+    if(isset($ConfigFile[$Key])){
+      return $ConfigFile[$Key];
+    }else{
+      return false;
+    }
+    
+  }
+  public function SaveConfig($File, $Key, $NewValue){
+    //Set the given key to the given value in the given file. Return true or false regarding success of saving.
+    
+    //Load the file if it exists or create a blank array.
+    if(file_exists($File)){
+      include($File);
+    }else{
+      $ConfigFile = array();
+    }
+    
+    //Update the existing array with the new data.
+    $ConfigFile[$Key]=$Value;
+    
+    //Save the file.
+    $ConfigFile = serialize($ConfigFile);
+    $ConfigFile = '<?php $ConfigFile = '.$ConfigFile;
+    return file_put_contents($File, $ConfigFile);
+    
   }
   public function Event($Name, $Callback = false){
     
@@ -230,6 +253,9 @@ class Legba{
   public function ShowRuntimeErrors(){
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
+  }
+  private function User(){
+    return $this->User;
   }
   
 }
