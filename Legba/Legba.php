@@ -78,11 +78,14 @@ class Legba{
           try{
             eval($Callback);
           }catch(Exception $e){
-            /* TODO permissions and config to permit this
-            Event('Event Exception');
-            echo '<p><b>EVENT THREW EXCEPTION</b></p>';
-            pd($e);
-            */
+            if(
+              MayI('Verbose')&&
+              isset($_GET['verbose'])
+            ){
+              Event('Event Exception');
+              echo '<h4>EVENT "'.$Name.'" THREW EXCEPTION</h4>';
+              pd($e);
+            }
           }
         }
       }
@@ -121,6 +124,17 @@ class Legba{
       exit();
     }
     return true;
+  }
+  public function MayI($Name){
+    //Check whether the user has a case-insensitive permission. Return true or false.
+    $Name = strtolower($Name);
+    //TODO
+    switch($Name){
+      case 'verbose':
+        return true;
+      default: 
+        return false;
+    }
   }
   
 }
