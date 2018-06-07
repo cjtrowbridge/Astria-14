@@ -72,8 +72,8 @@ class Legba{
     
     if($Callback == false){
       //Trigger the callbacks hooked to a particular event name
-      if(isset($this->$Events[$Name])){
-        foreach($this->$Events[$Name] as $Callback){
+      if(isset($this->Events[$Name])){
+        foreach($this->Events[$Name] as $Callback){
           /* Note that the callback is evaluated, and as such can be any php script, but must be syntactically complete. ie: "foo();" */
           try{
             eval($Callback);
@@ -91,12 +91,12 @@ class Legba{
       if(is_string($Name)){
         /* If this event doesn't already exist, create it. */
         if(
-          (!(isset($this->$Events[$Name])))
+          (!(isset($this->Events[$Name])))
         ){
-          $this->$Events[$Name]=array();
+          $this->Events[$Name]=array();
         }
         /* Add the callback to the array for this event */
-        $this->$Events[$Name][]=$Callback;
+        $this->Events[$Name][]=$Callback;
       }else{
         fail('<h1>Event Description Must Be A String;</h1><pre>'.var_export($EventDescription,true).'</pre>');
       }
