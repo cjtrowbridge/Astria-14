@@ -224,6 +224,7 @@ class Legba{
   public function ShowDebugSummary(){
     echo '<h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
+    $this->pd($this->Debug);
   }
   
 }
