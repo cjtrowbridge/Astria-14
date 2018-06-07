@@ -86,11 +86,11 @@ class Legba{
       'Time'        => $Time,
       'Delta-Time'  => ($Time - $Previous['Time'])
     );
-    $This->Debug[]=$EventDebug;
+    $this->Debug[]=$EventDebug;
     
     //Output verbose event information if permitted and requested.
     if(
-      MayI('Verbose')&&
+      $this->MayI('Verbose')&&
       isset($_GET['verbose'])
     ){
       echo '<h4 title="'.var_export($EventDebug,true).'">Event: "'.$Name.'"</h4>';
@@ -106,7 +106,7 @@ class Legba{
             eval($Callback);
           }catch(Exception $e){
             if(
-              MayI('Verbose')&&
+              $this->MayI('Verbose')&&
               isset($_GET['verbose'])
             ){
               Event('Event Exception');
