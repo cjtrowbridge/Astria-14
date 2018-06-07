@@ -48,3 +48,6 @@ if($Legba->LoggedIn()){
   $Legba->Event('Not Logged In - 404');
   
 }
+
+//This event should not happen. Something should catch each route. If we get here, it is important to log how we got here and alert developers to correct the issue.
+$Legba->Event('End');
