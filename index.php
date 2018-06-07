@@ -5,7 +5,7 @@ include('Legba/Legba.php');
 $Legba = new Legba();
 
 //Check the main Legba configuration file to see whether SSL is required for all connections...
-if($Legba->Config('Legba/Config.php','Require SSL')){
+if($Legba->Config('Legba/Config.php','Allow Non-Secure Connections') != true){
   //This function requires the current connection to use SSL. If it is not, it will be redirected to a secure connection.
   $Legba->RequireSSL();
 }
