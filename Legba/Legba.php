@@ -134,7 +134,7 @@ class Legba{
     
     //Save the file.
     $ConfigFile = serialize($ConfigFile);
-    $ConfigFile = '<?php $ConfigFile = '.$ConfigFile;
+    $ConfigFile = '<?php $ConfigFile = '.$ConfigFile.';';
     return file_put_contents($File, $ConfigFile);
     
   }
