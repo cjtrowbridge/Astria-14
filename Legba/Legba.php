@@ -42,7 +42,7 @@ class Legba{
   //Static Functions
   public static function pd($Input){
     echo '<pre>';
-    var_dumo($Input);
+    var_dump($Input);
     echo '</pre>';
   }
   public static function sha256($Input){
