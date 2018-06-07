@@ -138,6 +138,50 @@ class Legba{
     }
     
   }
+  public function BackupConfig($File){
+    $this->Event('Backing Up Config File: "'.$File.'"');
+    
+    $FilePrefix = rtrim($File,'php');
+    
+    $Index = 0;
+    while(file_exists($FilePrefix.$Index.'.php'){
+      $Index++;
+    }
+    $Dest=$FilePrefix.$Index.'.php';
+    $Ret = copy($Name, $Dest);
+    
+    
+    $Ret = file_put_contents($File, $ConfigFile);
+    if($Ret){
+      $this->Event('Succeeded Backing Up Config File: "'.$File.'" to "'.$Dest.'"');
+    }else{
+      $this->Event('Failed Backing Up Config File: "'.$File.'" to "'.$Dest.'"');
+    }
+  }
+  public function DeleteConfig($File, $Key){
+    $this->Event('Deleting Key From Config File: "'.$File.'" and Key "'.$Key.'"');
+    //Delete the given key from the given file. Return true or false regarding success of saving new version.
+    
+    //Load the file if it exists or create a blank array.
+    if(file_exists($File)){
+      include($File);
+    }else{
+      $ConfigFile = array();
+    }
+    
+    //Delete the key from the array.
+    unset($ConfigFile[$Key]);
+    
+    //Save the file.
+    $ConfigFile = serialize($ConfigFile);
+    $ConfigFile = '<?php $ConfigFile = unserialize(\''.$ConfigFile.'\');';
+    $Ret = file_put_contents($File, $ConfigFile);
+    if($Ret){
+      $this->Event('Succeeded Deleting Key From Config File: "'.$File.'" and Key "'.$Key.'"');
+    }else{
+      $this->Event('Failed Deleting Key From Config File: "'.$File.'" and Key "'.$Key.'"');
+    }
+  }
   public function SaveConfig($File, $Key, $NewValue){
     $this->Event('Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     //Set the given key to the given value in the given file. Return true or false regarding success of saving.
