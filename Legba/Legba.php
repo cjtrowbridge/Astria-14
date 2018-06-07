@@ -23,7 +23,7 @@ class Legba{
     );
     
     //Create initial empty events list.
-    $this->$Events = array(
+    $Events = array(
       
     );
     
