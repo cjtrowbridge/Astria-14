@@ -9,10 +9,10 @@ class Legba{
   //Native class primitives
   function __construct(){
     //Create a new id for this thread.
-    $this->$ThreadID = Legba::sha256(uniqid(true));
+    $ThreadID = Legba::sha256(uniqid(true));
     
     //Set up initial debug array.
-    $this->$Debug = array(
+    $Debug = array(
       0=>array(
         'Description'=> 'Legba Constructor',
         'RAM'        => (memory_get_usage()/1000000),
