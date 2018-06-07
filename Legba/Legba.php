@@ -101,6 +101,7 @@ class Legba{
     }
     return $return;
   }
+  //TODO try using json instead of serialize and see if that is more managable. I have the feeling that serialize might not be the most elegant and robust long-term solution. 
   public function Config($File, $Key){
     //Assume these config files contain valid associative arrays. Return the specified element in the first dimension of the array.
     $this->Event('Loading Config File: "'.$File.'" and Key "'.$Key.'"');
