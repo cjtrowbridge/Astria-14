@@ -16,7 +16,7 @@ class Legba{
     $Time = round(microtime(true),4);
     $this->Debug = array(
       0=>array(
-        'Index'       => 0,
+        'Event Index' => 0,
         'Description' => 'Legba Constructor',
         'RAM'         => $RAM,
         'Delta-RAM'   => 0,
@@ -126,7 +126,7 @@ class Legba{
     
     //Add debug information to thread log.
     $EventDebug = array(
-      'Index'       => ($Previous['Index'] + 1),
+      'Event Index' => ($Previous['Index'] + 1),
       'Description' => $Name,
       'RAM'         => $RAM,
       'Delta-RAM'   => round($RAM  - $Previous['RAM'],4),
