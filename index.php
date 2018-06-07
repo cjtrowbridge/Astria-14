@@ -12,7 +12,7 @@ if($Legba->Config('Legba/Config.php','Require SSL')){
 
 //If so configured, show everyone runtime errors. This is useful for development builds.
 if($Legba->MayI('Show Everyone Runtime Errors')){
-  $Lebga->ShowRuntimeErrors();
+  $Legba->ShowRuntimeErrors();
 }
 
 //Extensions add core shared functionality. Example: file management. Thus extensions are loaded before plugins which add specific features.
