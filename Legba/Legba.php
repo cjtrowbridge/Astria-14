@@ -103,28 +103,28 @@ class Legba{
   }
   public function Config($File, $Key){
     //Assume these config files contain valid associative arrays. Return the specified element in the first dimension of the array.
-    Event('Loading Config File: "'.$File.'" and Key "'.$Key.'"');
+    $this->Event('Loading Config File: "'.$File.'" and Key "'.$Key.'"');
     
     //Load the file into a variable. 
     if(file_exists($File)){
       include($File);
     }else{
-      Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because File Did Not Exist.');
+      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because File Did Not Exist.');
       return false;
     }
     
     //If the specified key exists, then return it, otherwise return false. This means non-present values will return as false.
     if(isset($ConfigFile[$Key])){
-      Event('Succeeded Loading Config File: "'.$File.'" and Key "'.$Key.'".');
+      $this->Event('Succeeded Loading Config File: "'.$File.'" and Key "'.$Key.'".');
       return $ConfigFile[$Key];
     }else{
-      Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because Key Not Found; Returning False.');
+      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because Key Not Found; Returning False.');
       return false;
     }
     
   }
   public function SaveConfig($File, $Key, $NewValue){
-    Event('Saving Config File: "'.$File.'" and Key "'.$Key.'"');
+    $this->Event('Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     //Set the given key to the given value in the given file. Return true or false regarding success of saving.
     
     //Load the file if it exists or create a blank array.
@@ -142,9 +142,9 @@ class Legba{
     $ConfigFile = '<?php $ConfigFile = unserialize(\''.$ConfigFile.'\');';
     $Ret = file_put_contents($File, $ConfigFile);
     if($Ret){
-      Event('Succeeded Saving Config File: "'.$File.'" and Key "'.$Key.'"');
+      $this->Event('Succeeded Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     }else{
-      Event('Failed Saving Config File: "'.$File.'" and Key "'.$Key.'"');
+      $this->Event('Failed Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     }
   }
   public function Event($Name, $Callback = false){
