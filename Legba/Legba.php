@@ -126,7 +126,7 @@ class Legba{
     
     //Add debug information to thread log.
     $EventDebug = array(
-      'Event Index' => ($Previous['Index'] + 1),
+      'Event Index' => ($Previous['Event Index'] + 1),
       'Description' => $Name,
       'RAM'         => $RAM,
       'Delta-RAM'   => round($RAM  - $Previous['RAM'],4),
