@@ -10,6 +10,11 @@ if($Legba->Config('Legba/Config.php','Require SSL')){
   $Legba->RequireSSL();
 }
 
+//If so configured, show everyone runtime errors. This is useful for development builds.
+if($Legba->MayI('Show Everyone Runtime Errors')){
+  $Lebga->ShowRuntimeErrors();
+}
+
 //Extensions add core shared functionality. Example: file management. Thus extensions are loaded before plugins which add specific features.
 $Legba->Load('plugins');
 
@@ -19,6 +24,11 @@ $Legba->Event('Before Login - SSL');
 //Check if the user is logged in, and process the login if they are trying to log in.
 if($Legba->LoggedIn()){
   //The user is logged in and authenticated.
+  
+  //If so configured, show this user any runtime errors. This is useful for admins.
+  if($Legba->MayI('Show Runtime Errors')){
+    $Lebga->ShowRuntimeErrors();
+  }
   
   //This event should be used for things that need to happen quickly and sometimes without showing a normal page. For example JSON endpoints or authenticated webhooks.
   $Legba->Event('Logged In');
