@@ -215,6 +215,8 @@ class Legba{
     $Name = strtolower($Name);
     //TODO
     switch($Name){
+      case 'show runtime errors':
+      case 'show everyone runtime errors':
       case 'verbose':
         return true;
       default: 
@@ -224,6 +226,10 @@ class Legba{
   public function ShowDebugSummary(){
     echo '<h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
+  }
+  public function ShowRuntimeErrors(){
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
   }
   
 }
