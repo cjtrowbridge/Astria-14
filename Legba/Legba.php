@@ -9,7 +9,7 @@ class Legba{
   //Native class primitives
   function __construct(){
     //Create a new id for this thread.
-    $this->$ThreadID = sha256(uniqid(true));
+    $this->$ThreadID = Legba::sha256(uniqid(true));
     
     //Set up initial debug array.
     $this->$Debug = array(
