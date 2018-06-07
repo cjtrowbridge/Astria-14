@@ -11,7 +11,7 @@ class Legba{
   function __destruct(){
     
   }
-  function __call(){
+  function __call($Name, $Arguments){
     //TODO Include graceful error handling
   }
   
