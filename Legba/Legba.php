@@ -130,7 +130,7 @@ class Legba{
     }
     
     //Update the existing array with the new data.
-    $ConfigFile[$Key]=$Value;
+    $ConfigFile[$Key]=$NewValue;
     
     //Save the file.
     $ConfigFile = serialize($ConfigFile);
