@@ -3,19 +3,10 @@ A simple and secure web application framework.
 
 Astria understands databases, and generates procedural pages for interacting with data. These pages can be replaced with your own, or left as they are.
 
-Astria manages your users. It authenticates them and gives you access to their data simply. It even manages user permissions for you at scale.
+Astria manages your users. It authenticates them and gives you access to their data simply. It even manages user permissions for you at scale. Users can authenticate through email, oauth, and eventually other protocols like LDAP, ADDC, etc.
 
-Speaking of scale, Astria can scale to handle very large workloads or serve just one or two users. It has been in continuous development since 2001, and today it is managing everything from multi-million-dollar companies to home media servers. 
+Astria has been in continuous development since 2001.  
 
+## Major Goals with this version
 
-## Goals with this version
-
--OAuth only for all logins  
--SchemaRouter is default view for all routes  
--Events include routes as an optional parameter  
--Schema definition stored in memory  
-
-Data Goals;  
--All queries stored in memory with past results for 24 hours  
--Previous data is delivered with page  
--Fresh data in views is queried asynchronously from page  
+Functionality is split into object-oriented modules with static functions minimized.
