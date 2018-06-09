@@ -1,5 +1,13 @@
 <?php
 
+/*
+
+  Lebga 2.0
+  
+  Legba is an Astria module which manages users, groups, sessions, permissions, configuration, and events.
+
+*/
+
 class Legba{
   
   private $ThreadID = false;
