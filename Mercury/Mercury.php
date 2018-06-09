@@ -2,7 +2,7 @@
 
 /*
   
-  DB-API needs a better name. 
+  Mercury 1.0
   
   The purpose of this astria module is to facilitate procedural interfaces for JSON GET/POST and web GET/POST interfaces for databases.
   
@@ -18,7 +18,7 @@
   
 */
 
-class DBAPI{
+class Mercury{
   
   function __construct(){
     
