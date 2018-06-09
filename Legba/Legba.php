@@ -4,7 +4,7 @@
 
   Lebga 2.0
   
-  Legba is an Astria module which manages users, groups, sessions, permissions, configuration, and events.
+  Legba is an Astria module which manages users, groups, sessions, permissions, configuration, database connections, and events.
 
 */
 
