@@ -69,7 +69,7 @@ class Legba{
     
     //Hook default pages to events.
     //TODO make this configurable.
-    Hook('Not Logged In - Show Content', 'login/', Legba::PageLogin());
+    Hook('Not Logged In - Show Content', 'login/', 'Legba::PageLogin();');
     
   }
   function __destruct(){
