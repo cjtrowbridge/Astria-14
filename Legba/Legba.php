@@ -160,7 +160,7 @@ class Legba{
     while(file_exists($FilePrefix.'Backup.'.$Index.'.php')){
       $Index++;
     }
-    $Dest=$FilePrefix.$Index.'.php';
+    $Dest=$FilePrefix.'Backup.'.$Index.'.php';
     $Ret = copy($File, $Dest);
     if($Ret){
       $this->Event('Succeeded Backing Up Config File: "'.$File.'" to "'.$Dest.'"');
