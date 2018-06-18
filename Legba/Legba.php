@@ -14,6 +14,7 @@ class Legba{
   private $Debug    = false;
   private $Events   = false;
   private $User     = false;
+  private $Route    = false;
   
   //Native class primitives
   function __construct(){
@@ -36,6 +37,29 @@ class Legba{
     
     //Create initial empty events list.
     $this->Events = array();
+    
+    //Figure out the route and set a global variable in case htaccess is not available.
+    $Request = $_SERVER['REQUEST_URI'];
+    //Remove any extra slashes in the request
+    $Request = trim($Request, '/');
+    //If there is a question mark, truncate the url we are parsing at that point.
+    $Request = explode("?", $Request);
+    $Request = $Request[0];
+    //Make sure there is exactly one trailing slash in the route
+    if(!(substr($Request, -1)=='/')){$Request.='/';}
+    //Set the superglobal variable $_GET['route'] to this route
+    $_GET['route']=$Request;
+    $RequestSegments = explode('/', $Request);
+    $Route = array();
+    foreach($RequestSegments as $RequestSegment){
+      if(!(trim($RequestSegment)=='')){
+        $Route[]=$RequestSegment;
+      }
+    }
+    $this->Route = $Route;
+    //Clean up these variables
+    unset $Route, $RequestSegments, $RequestSegment;
+    
     
   }
   function __destruct(){
