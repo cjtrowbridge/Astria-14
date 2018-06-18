@@ -102,9 +102,17 @@ class Legba{
   
   
   //Default Pages
-  public static function DefaultPageLogin(){
+  public static function DefaultPage_Home(){
+    //Show home page from template
+    die(file_get_contents('Legba/Pages/Home.html'));
+  }
+  public static function DefaultPage_Login(){
     //Show login page from template
     die(file_get_contents('Legba/Pages/Login.html'));
+  }
+  public static function DefaultPage_LoggedIn(){
+    //Show logged in page from template
+    die(file_get_contents('Legba/Pages/LoggedIn.html'));
   }
   
   
@@ -396,8 +404,15 @@ class Legba{
   public function DefaultPages(){
     //Hook default pages to events.
     $this->Event('Hooking default pages onto routes as configured...');
+    
     if($this->Config('Legba/Pages/Config.php','Use Legba Login Page',true) == true){
-      $this->Hook('Not Logged In - Show Content', 'login/', 'Legba::DefaultPageLogin();');
+      $this->Hook('Not Logged In - Show Content', 'login/', 'Legba::DefaultPage_Login();');
+    }
+    if($this->Config('Legba/Pages/Config.php','Use Legba Logged In Page',true) == true){
+      $this->Hook('Logged In - Show Content', '/', 'Legba::DefaultPage_LoggedIn();');
+    }
+    if($this->Config('Legba/Pages/Config.php','Use Legba Public Home Page',true) == true){
+      $this->Hook('Not Logged In - Show Content', '/', 'Legba::DefaultPage_PublicHome();');
     }
     
     $this->Event('Done hooking default pages onto routes as configured...');
