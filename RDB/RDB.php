@@ -61,6 +61,7 @@ class RDB{
   
   //Return a list of all tables in this database
   
+  
   //Return a list of all columns in this database including data type and whether null, primary key, foreign key, index, etc.
   
   //Insert a row
@@ -83,7 +84,7 @@ class RDB{
         }
         return $Output;
         break;
-				
+        
       default:
         die('Invalid Database Type: '.$this->Type);
     }
