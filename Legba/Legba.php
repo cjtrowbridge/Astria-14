@@ -382,8 +382,8 @@ class Legba{
     $RAM  = round(memory_get_usage()/1000000-$First['RAM'],4);
     $Runtime = round(microtime(true)-$First['Time'],4);
     echo '<hr><h4>Route: '.$_GET['route'].'</h4>';
-    echo '<h4>Runtime: '.$Runtime.'</h4>';
-    echo '<h4>Memory: '.$RAM.'</h4>';
+    echo '<h4>Runtime: '.$Runtime.' sec</h4>';
+    echo '<h4>Memory: '.$RAM.' mb</h4>';
     echo '<hr><h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
     echo '<hr><h4>Events</h4>';
