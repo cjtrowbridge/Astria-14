@@ -64,13 +64,6 @@ class Legba{
     //Create initial empty events list.
     $this->Events = array();
     
-    
-    
-    
-    //Hook default pages to events.
-    //TODO make this configurable.
-    Hook('Not Logged In - Show Content', 'login/', 'Legba::PageLogin();');
-    
   }
   function __destruct(){
     
@@ -397,7 +390,13 @@ class Legba{
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
   }
-  private function User(){
+  public function UseDefaultPages(){
+    //Hook default pages to events.
+    //TODO make this configurable.
+    Hook('Not Logged In - Show Content', 'login/', 'Legba::PageLogin();');
+    
+  }
+  public function User(){
     return $this->User;
   }
   
