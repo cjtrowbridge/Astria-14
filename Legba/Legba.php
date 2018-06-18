@@ -27,7 +27,8 @@ class Legba{
     $this->Debug = array(
       0=>array(
         'Event Index' => 0,
-        'Description' => 'Legba Constructor',
+        'Route'       => $_GET['route'],
+        'Event Name'  => 'Legba Constructor',
         'RAM'         => $RAM,
         'Delta-RAM'   => 0,
         'Time'        => $Time,
@@ -247,7 +248,7 @@ class Legba{
       $this->Event('Failed Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     }
   }
-  public function Event($Name, $Callback = false){
+  public function Event($Name, $Route = 'Any'){
     
     //Fetch previous data for comparison.
     $Previous = $this->Debug[(count($this->Debug)-1)];
@@ -259,7 +260,8 @@ class Legba{
     //Add debug information to thread log.
     $EventDebug = array(
       'Event Index' => ($Previous['Event Index'] + 1),
-      'Description' => $Name,
+      'Route'       => $_GET['route'],
+      'Event Name'  => $Name,
       'RAM'         => $RAM,
       'Delta-RAM'   => round($RAM  - $Previous['RAM'],4),
       'Time'        => $Time,
