@@ -73,14 +73,14 @@ class RDB{
   public function Query($SQL){
     switch($this->Type){
       case 'mysql':
-				$Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
-				if(is_bool($Result)){
-					return $Result;
-				}
-				$Output=array();
-				while($Row=mysqli_fetch_assoc($Result)){
-					$Output[]=$Row;
-				}
+        $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
+        if(is_bool($Result)){
+          return $Result;
+        }
+        $Output=array();
+        while($Row=mysqli_fetch_assoc($Result)){
+          $Output[]=$Row;
+        }
         return $Output;
         break;
 				
