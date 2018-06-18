@@ -132,7 +132,8 @@ class Legba{
     if(file_exists($File)){
       include($File);
     }else{
-      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because File Did Not Exist.');
+      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because file did not exist. Created new config file with default value for this key.');
+      $this->SaveConfig($File,$Key,false);
       return false;
     }
     
@@ -141,12 +142,16 @@ class Legba{
       $this->Event('Succeeded Loading Config File: "'.$File.'" and Key "'.$Key.'".');
       return $ConfigFile[$Key];
     }else{
-      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because Key Not Found; Returning False.');
+      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because key not found; saving default value for this key and returning false.');
+      $this->SaveConfig($File,$Key,false);
       return false;
     }
     
   }
   public function BackupConfig($File){
+    if(!(file_exists($File))){
+      return false;
+    }
     $this->Event('Backing Up Config File: "'.$File.'"');
     
     $FilePrefix = rtrim($File,'php');
