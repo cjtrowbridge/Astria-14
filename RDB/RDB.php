@@ -60,7 +60,16 @@ class RDB{
   }
   
   //Return a list of all tables in this database
-  
+  public function ListTables(){
+    switch($this->Type){
+      case 'mysql':
+        $Tables = $this->Query('show tables');
+        return $Tables;
+        
+      default:
+        die('Invalid Database Type: '.$this->Type);
+    }
+  }
   
   //Return a list of all columns in this database including data type and whether null, primary key, foreign key, index, etc.
   
