@@ -310,19 +310,28 @@ class Legba{
   }
   
   //Hook a function onto an event
-  public function Hook($Name, $Callback = false){
+  public function Hook($Event, $Route = 'Any', $Callback = false){
+    
+    //The Callback should be hooked onto the event only when the specified route matches the current route, or 'Any.'
+    if(
+      $Route !== $_GET['route'] &&
+      $Route !== 'Any'
+    ){
+      return false;
+    }
+    
     //Hook a callback onto an event name
-    if(is_string($Name)){
+    if(is_string($Event)){
       /* If this event doesn't already exist, create it. */
       if(
-        (!(isset($this->Events[$Name])))
+        (!(isset($this->Events[$Event])))
       ){
-        $this->Events[$Name]=array();
+        $this->Events[$Event]=array();
       }
       /* Add the callback to the array for this event */
-      $this->Events[$Name][]=$Callback;
+      $this->Events[$Event][]=$Callback;
     }else{
-      fail('<h1>Event Description Must Be A String;</h1><pre>'.var_export($EventDescription,true).'</pre>');
+      die('Event must be a string.');
     }
   }
   
