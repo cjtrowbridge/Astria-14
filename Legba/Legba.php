@@ -434,6 +434,7 @@ class Legba{
     $this->Event('Showing Page From Template: '.$File);
     echo file_get_contents('Legba/Pages/LoggedIn.html');
     $this->Event('end');
+    exit;
   }
   
 
