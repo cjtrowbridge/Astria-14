@@ -28,7 +28,7 @@ class Legba{
       0=>array(
         'Index' => 0,
         'Route'       => $_GET['route'],
-        'Event Name'  => 'Legba Constructor',
+        'Event'       => 'Legba Constructor',
         'RAM'         => $RAM,
         'Delta-RAM'   => 0,
         'Time'        => $Time,
@@ -261,7 +261,7 @@ class Legba{
     $EventDebug = array(
       'Index'       => ($Previous['Index'] + 1),
       'Route'       => $_GET['route'],
-      'Event Name'  => $Name,
+      'Event'       => $Name,
       'RAM'         => $RAM,
       'Delta-RAM'   => round($RAM  - $Previous['RAM'],4),
       'Time'        => $Time,
