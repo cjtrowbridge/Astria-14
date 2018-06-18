@@ -58,7 +58,7 @@ class Legba{
     }
     $this->Route = $Route;
     //Clean up these variables
-    unset $Route, $RequestSegments, $RequestSegment;
+    unset($Route, $RequestSegments, $RequestSegment);
     
     
   }
