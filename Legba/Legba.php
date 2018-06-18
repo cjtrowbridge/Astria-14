@@ -65,7 +65,7 @@ class Legba{
     
     //Hook default pages to events.
     //TODO make this configurable.
-    
+    Hook('Not Logged In - Show Content', 'login/', Legba::PageLogin());
     
   }
   function __destruct(){
@@ -90,6 +90,10 @@ class Legba{
     $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, $encryption_key, base64_decode($encrypted_string), MCRYPT_MODE_ECB, $iv);
     $decrypted_string = iconv(mb_detect_encoding($decrypted_string, mb_detect_order(), true), "UTF-8", $decrypted_string);
     return $decrypted_string;
+  }
+  public static function PageLogin(){
+    //Show login page from template
+    die(file_get_contents('Legba/Pages/Login.html'));
   }
   public static function pd($Input){
     echo '<pre>';
@@ -296,6 +300,7 @@ class Legba{
       }
     }
     
+    //Potentially show debug information if we are at the end of the request
     if(strtolower($Name) == 'end'){
       //This is an important failure state so we will potentially dump extra debug information.
       if(
@@ -305,7 +310,6 @@ class Legba{
         $this->ShowDebugSummary();
       }
     }
-    
     return false;
   }
   
