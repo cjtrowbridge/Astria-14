@@ -275,39 +275,22 @@ class Legba{
       echo '<h4 title="'.str_replace('"',"'",var_export($EventDebug,true)).'">Event: "'.$Name.'"</h4>';
     }
     
-    //Hook a callback onto an event name or trigger the callbacks associated with the event name.
-    if($Callback == false){
-      //Trigger the callbacks hooked to a particular event name
-      if(isset($this->Events[$Name])){
-        foreach($this->Events[$Name] as $Callback){
-          /* Note that the callback is evaluated, and as such can be any php script, but must be syntactically complete. ie: "foo();" */
-          try{
-            eval($Callback);
-          }catch(Exception $e){
-            if(
-              $this->MayI('Verbose')&&
-              isset($_GET['verbose'])
-            ){
-              Event('Event Exception');
-              echo '<h4>EVENT "'.$Name.'" THREW EXCEPTION</h4>';
-              pd($e);
-            }
+    //Trigger the callbacks hooked to a particular event name
+    if(isset($this->Events[$Name])){
+      foreach($this->Events[$Name] as $Callback){
+        /* Note that the callback is evaluated, and as such can be any php script, but must be syntactically complete. ie: "foo();" */
+        try{
+          eval($Callback);
+        }catch(Exception $e){
+          if(
+            $this->MayI('Verbose')&&
+            isset($_GET['verbose'])
+          ){
+            Event('Event Exception');
+            echo '<h4>EVENT "'.$Name.'" THREW EXCEPTION</h4>';
+            pd($e);
           }
         }
-      }
-    }else{
-      //Hook a callback onto an event name
-      if(is_string($Name)){
-        /* If this event doesn't already exist, create it. */
-        if(
-          (!(isset($this->Events[$Name])))
-        ){
-          $this->Events[$Name]=array();
-        }
-        /* Add the callback to the array for this event */
-        $this->Events[$Name][]=$Callback;
-      }else{
-        fail('<h1>Event Description Must Be A String;</h1><pre>'.var_export($EventDescription,true).'</pre>');
       }
     }
     
@@ -323,6 +306,24 @@ class Legba{
     
     return false;
   }
+  
+  //Hook a function onto an event
+  public function Hook($Name, $Callback = false){
+    //Hook a callback onto an event name
+    if(is_string($Name)){
+      /* If this event doesn't already exist, create it. */
+      if(
+        (!(isset($this->Events[$Name])))
+      ){
+        $this->Events[$Name]=array();
+      }
+      /* Add the callback to the array for this event */
+      $this->Events[$Name][]=$Callback;
+    }else{
+      fail('<h1>Event Description Must Be A String;</h1><pre>'.var_export($EventDescription,true).'</pre>');
+    }
+  }
+  
   public function Load($Directory = false){
     //Load all plugins in the specified directory
     
