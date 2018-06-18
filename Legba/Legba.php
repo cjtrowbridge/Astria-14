@@ -21,23 +21,6 @@ class Legba{
     //Create a new id for this thread.
     $this->ThreadID = Legba::sha256(uniqid(true));
     
-    //Set up initial debug array.
-    $RAM  = round(memory_get_usage()/1000000,4);
-    $Time = round(microtime(true),4);
-    $this->Debug = array(
-      0=>array(
-        'Index' => 0,
-        'Route'       => $_GET['route'],
-        'Event'       => 'Legba Constructor',
-        'RAM'         => $RAM,
-        'Delta-RAM'   => 0,
-        'Time'        => $Time,
-        'Delta-Time'  => 0
-      )
-    );
-    
-    //Create initial empty events list.
-    $this->Events = array();
     
     //Figure out the route and set a global variable in case htaccess is not available.
     if(!(isset($_GET['route']))){
@@ -61,6 +44,27 @@ class Legba{
     $this->Route = $Route;
     //Clean up these variables
     unset($Route, $RequestSegments, $RequestSegment);
+    
+    
+    //Set up initial debug array.
+    $RAM  = round(memory_get_usage()/1000000,4);
+    $Time = round(microtime(true),4);
+    $this->Debug = array(
+      0=>array(
+        'Index' => 0,
+        'Route'       => $_GET['route'],
+        'Event'       => 'Legba Constructor',
+        'RAM'         => $RAM,
+        'Delta-RAM'   => 0,
+        'Time'        => $Time,
+        'Delta-Time'  => 0
+      )
+    );
+    
+    //Create initial empty events list.
+    $this->Events = array();
+    
+    
     
     
     //Hook default pages to events.
