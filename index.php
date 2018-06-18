@@ -19,11 +19,11 @@ if($Legba->MayI('Show Everyone Runtime Errors')){
   $Legba->ShowRuntimeErrors();
 }
 
-//Extensions add core shared functionality. Example: file management. Thus extensions are loaded before plugins which add specific features.
-$Legba->Load('plugins');
-
 //This event should be used to handle secure pre-login webhooks or endpoints. Examples include obfuscated secure webhooks which should not be transmitted in the clear but do not feature user authentication.
 $Legba->Event('Before Login - SSL');
+
+//Load any default pages as configured
+$Legba->DefaultPages();
 
 //Check if the user is logged in, and process the login if they are trying to log in.
 if($Legba->LoggedIn()){
