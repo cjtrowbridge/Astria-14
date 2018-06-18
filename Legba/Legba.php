@@ -102,7 +102,7 @@ class Legba{
   
   
   //Default Pages
-  public static function DefaultPage_Home(){
+  public static function DefaultPage_PublicHome(){
     //Show home page from template
     die(file_get_contents('Legba/Pages/Home.html'));
   }
