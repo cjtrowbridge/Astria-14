@@ -161,10 +161,7 @@ class Legba{
       $Index++;
     }
     $Dest=$FilePrefix.$Index.'.php';
-    $Ret = copy($Name, $Dest);
-    
-    
-    $Ret = file_put_contents($File, $ConfigFile);
+    $Ret = copy($File, $Dest);
     if($Ret){
       $this->Event('Succeeded Backing Up Config File: "'.$File.'" to "'.$Dest.'"');
     }else{
