@@ -101,20 +101,7 @@ class Legba{
   }
   
   
-  //Default Pages
-  public static function DefaultPage_PublicHome(){
-    //Show home page from template
-    die(file_get_contents('Legba/Pages/Home.html'));
-  }
-  public static function DefaultPage_Login(){
-    //Show login page from template
-    die(file_get_contents('Legba/Pages/Login.html'));
-  }
-  public static function DefaultPage_LoggedIn(){
-    //Show logged in page from template
-    die(file_get_contents('Legba/Pages/LoggedIn.html'));
-  }
-  
+
   
   //Accessor/Mutator Functions
   //TODO make the default table arguments come from a config setting.
@@ -406,13 +393,13 @@ class Legba{
     $this->Event('Hooking default pages onto routes as configured...');
     
     if($this->Config('Legba/Pages/Config.php','Use Legba Login Page',true) == true){
-      $this->Hook('Not Logged In - Show Content', 'login/', 'Legba::DefaultPage_Login();');
+      $this->Hook('Not Logged In - Show Content', 'login/', '$this->DefaultPage_Login();');
     }
     if($this->Config('Legba/Pages/Config.php','Use Legba Logged In Page',true) == true){
-      $this->Hook('Logged In - Show Content', '/', 'Legba::DefaultPage_LoggedIn();');
+      $this->Hook('Logged In - Show Content', '/', '$this->DefaultPage_LoggedIn();');
     }
     if($this->Config('Legba/Pages/Config.php','Use Legba Public Home Page',true) == true){
-      $this->Hook('Not Logged In - Show Content', '/', 'Legba::DefaultPage_PublicHome();');
+      $this->Hook('Not Logged In - Show Content', '/', '$this->DefaultPage_PublicHome();');
     }
     
     $this->Event('Done hooking default pages onto routes as configured...');
@@ -421,5 +408,28 @@ class Legba{
     return $this->User;
   }
   
+
+
+  
+  //Default Pages
+  public function DefaultPage_PublicHome(){
+    //Show home page from template
+    $this->ShowPageFromTemplate('Legba/Pages/Home.html');
+  }
+  public function DefaultPage_Login(){
+    //Show login page from template
+    $this->ShowPageFromTemplate('Legba/Pages/Login.html');
+  }
+  public function DefaultPage_LoggedIn(){
+    //Show logged in page from template
+    $this->ShowPageFromTemplate('Legba/Pages/LoggedIn.html');
+  }
+  public function ShowPageFromTemplate($File){
+    $this->Event('Showing Page From Template: '.$File);
+    echo file_get_contents('Legba/Pages/LoggedIn.html');
+    $this->Event('end');
+  }
+  
+
 }
   
