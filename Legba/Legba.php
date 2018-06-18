@@ -61,6 +61,10 @@ class Legba{
     unset($Route, $RequestSegments, $RequestSegment);
     
     
+    //Hook default pages to events.
+    //TODO make this configurable.
+    
+    
   }
   function __destruct(){
     
@@ -361,6 +365,7 @@ class Legba{
     }
   }
   public function ShowDebugSummary(){
+    echo '<hr><h4>Route: '.$_GET['route'].'</h4>';
     echo '<hr><h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
     echo '<hr><h4>Events</h4>';
