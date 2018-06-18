@@ -377,7 +377,13 @@ class Legba{
     }
   }
   public function ShowDebugSummary(){
+    $First = $this->Debug[0];
+    //Calculate debug information.
+    $RAM  = round(memory_get_usage()/1000000,4)-$First['RAM'];
+    $Runtime = round(microtime(true),4)-$First['Time'];
     echo '<hr><h4>Route: '.$_GET['route'].'</h4>';
+    echo '<h4>Runtime: '.$Runtime.'</h4>';
+    echo '<h4>Memory: '.$RAM.'</h4>';
     echo '<hr><h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
     echo '<hr><h4>Events</h4>';
