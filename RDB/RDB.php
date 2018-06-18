@@ -44,7 +44,7 @@ class RDB{
           $this->Credentials['Database']
         ) or die(mysqli_error());
         //TODO database charset should probably be editable, but in almost every modern case, this is the correct charset.
-        $this->Resource']->set_charset('utf8mb4');
+        $this->Resource->set_charset('utf8mb4');
         break;
         
       default:
