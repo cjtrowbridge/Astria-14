@@ -401,8 +401,8 @@ class Legba{
     if($this->Config('Legba/Pages/Config.php','Use Legba Login Page',true) == true){
       $this->Hook('Not Logged In - Show Content', 'login/', '$this->DefaultPage_Login();');
     }
-    if($this->Config('Legba/Pages/Config.php','Use Legba Logged In Page',true) == true){
-      $this->Hook('Logged In - Show Content', '/', '$this->DefaultPage_LoggedIn();');
+    if($this->Config('Legba/Pages/Config.php','Use Legba User Home Page',true) == true){
+      $this->Hook('Logged In - Show Content', '/', '$this->DefaultPage_UserHome();');
     }
     if($this->Config('Legba/Pages/Config.php','Use Legba Public Home Page',true) == true){
       $this->Hook('Not Logged In - Show Content', '/', '$this->DefaultPage_PublicHome();');
@@ -419,16 +419,16 @@ class Legba{
   
   //Default Pages
   public function DefaultPage_PublicHome(){
-    //Show home page from template
-    $this->ShowPageFromTemplate('Legba/Pages/Home.html');
+    //Show public home page from template
+    $this->ShowPageFromTemplate('Legba/Pages/PublicHome.html');
   }
   public function DefaultPage_Login(){
     //Show login page from template
     $this->ShowPageFromTemplate('Legba/Pages/Login.html');
   }
-  public function DefaultPage_LoggedIn(){
-    //Show logged in page from template
-    $this->ShowPageFromTemplate('Legba/Pages/LoggedIn.html');
+  public function DefaultPage_UserHome(){
+    //Show user home page from template
+    $this->ShowPageFromTemplate('Legba/Pages/UserHome.html');
   }
   public function ShowPageFromTemplate($File){
     $this->Event('Showing Page From Template: '.$File);
