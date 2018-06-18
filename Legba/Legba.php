@@ -157,7 +157,7 @@ class Legba{
     $FilePrefix = rtrim($File,'php');
     
     $Index = 0;
-    while(file_exists($FilePrefix.$Index.'.php')){
+    while(file_exists($FilePrefix.'Backup.'.$Index.'.php')){
       $Index++;
     }
     $Dest=$FilePrefix.$Index.'.php';
