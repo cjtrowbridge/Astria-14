@@ -397,7 +397,7 @@ class Legba{
     //Hook default pages to events.
     $this->Event('Hooking default pages onto routes as configured...');
     if($this->Config('Legba/Pages/Config.php','Use Legba Login Page',true) == true){
-      $this->Hook('Not Logged In - Show Content', 'login/', 'Legba::PageLogin();');
+      $this->Hook('Not Logged In - Show Content', 'login/', 'Legba::DefaultPageLogin();');
     }
     
     $this->Event('Done hooking default pages onto routes as configured...');
