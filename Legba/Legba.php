@@ -307,7 +307,7 @@ class Legba{
     
     //Get the list of default administrators from the Legba configuration file
     $this->Event('Fetching list of default administrators...');
-    $DefaultAdministrators = $Legba->Config('Legba/Config.php','Default Administrators');
+    $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
     if($DefaultAdministrators==false){
       $this->Event('No default administrators are currently configured.');
     }else{
