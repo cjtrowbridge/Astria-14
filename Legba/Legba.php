@@ -363,6 +363,9 @@ class Legba{
   public function ShowDebugSummary(){
     echo '<hr><h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
+    echo '<hr><h4>Events</h4>';
+    echo $this->pd($this->Events);
+    
   }
   public function ShowRuntimeErrors(){
     error_reporting(E_ALL);
