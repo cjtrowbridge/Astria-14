@@ -379,8 +379,8 @@ class Legba{
   public function ShowDebugSummary(){
     $First = $this->Debug[0];
     //Calculate debug information.
-    $RAM  = round(memory_get_usage()/1000000,4)-$First['RAM'];
-    $Runtime = round(microtime(true),4)-$First['Time'];
+    $RAM  = round(memory_get_usage()/1000000-$First['RAM'],4);
+    $Runtime = round(microtime(true)-$First['Time'],4);
     echo '<hr><h4>Route: '.$_GET['route'].'</h4>';
     echo '<h4>Runtime: '.$Runtime.'</h4>';
     echo '<h4>Memory: '.$RAM.'</h4>';
