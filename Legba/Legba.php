@@ -87,11 +87,7 @@ class Legba{
     $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, $encryption_key, base64_decode($encrypted_string), MCRYPT_MODE_ECB, $iv);
     $decrypted_string = iconv(mb_detect_encoding($decrypted_string, mb_detect_order(), true), "UTF-8", $decrypted_string);
     return $decrypted_string;
-  }
-  public static function PageLogin(){
-    //Show login page from template
-    die(file_get_contents('Legba/Pages/Login.html'));
-  }
+  }  
   public static function pd($Input){
     echo '<pre>';
     var_dump($Input);
@@ -102,6 +98,13 @@ class Legba{
   }
   public static function sha512($Input){
     return hash('sha512', $Input);
+  }
+  
+  
+  //Default Pages
+  public static function DefaultPageLogin(){
+    //Show login page from template
+    die(file_get_contents('Legba/Pages/Login.html'));
   }
   
   
@@ -155,7 +158,7 @@ class Legba{
   }
   //TODO try using json instead of serialize and see if that is more managable. I have the feeling that serialize might not be the most elegant and robust long-term solution. 
   //TODO add functionality for blowfishing these.
-  public function Config($File, $Key){
+  public function Config($File, $Key, $Default = false){
     //Assume these config files contain valid associative arrays. Return the specified element in the first dimension of the array.
     $this->Event('Loading Config File: "'.$File.'" and Key "'.$Key.'"');
     
@@ -164,8 +167,8 @@ class Legba{
       include($File);
     }else{
       $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because file did not exist. Created new config file with default value for this key.');
-      $this->SaveConfig($File,$Key,false);
-      return false;
+      $this->SaveConfig($File,$Key,$Default);
+      return $Default;
     }
     
     //If the specified key exists, then return it, otherwise return false. This means non-present values will return as false.
@@ -173,9 +176,9 @@ class Legba{
       $this->Event('Succeeded Loading Config File: "'.$File.'" and Key "'.$Key.'".');
       return $ConfigFile[$Key];
     }else{
-      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because key not found; saving default value for this key and returning false.');
-      $this->SaveConfig($File,$Key,false);
-      return false;
+      $this->Event('Failed Loading Config File: "'.$File.'" and Key "'.$Key.'" Because key not found; saving default value for this key.');
+      $this->SaveConfig($File,$Key,$Default);
+      return $Default;
     }
     
   }
@@ -390,10 +393,11 @@ class Legba{
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
   }
-  public function UseDefaultPages(){
+  public function DefaultPages(){
     //Hook default pages to events.
-    //TODO make this configurable.
-    Hook('Not Logged In - Show Content', 'login/', 'Legba::PageLogin();');
+    if($Legba->Config('Legba/DefaultPages/Config.php','Use Legba Login Page',true) == true){
+      Hook('Not Logged In - Show Content', 'login/', 'Legba::PageLogin();');
+    }
     
   }
   public function User(){
