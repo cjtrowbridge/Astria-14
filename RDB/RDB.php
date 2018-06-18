@@ -73,7 +73,7 @@ class RDB{
   public function Query($SQL){
     switch($this->Type){
       case 'mysql':
-        $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
+				$Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
 				if(is_bool($Result)){
 					return $Result;
 				}
@@ -83,7 +83,7 @@ class RDB{
 				}
         return $Output;
         break;
-
+				
       default:
         die('Invalid Database Type: '.$this->Type);
     }
