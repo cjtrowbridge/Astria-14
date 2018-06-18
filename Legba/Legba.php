@@ -305,6 +305,16 @@ class Legba{
   public function LoggedIn(){
     //Check whether a user is currently logged in and authenticated. Return user or false.
     
+    //Get the list of default administrators from the Legba configuration file
+    $this->Event('Fetching list of default administrators...');
+    $DefaultAdministrators = $Legba->Config('Legba/Config.php','Default Administrators');
+    if($DefaultAdministrators==false){
+      $this->Event('No default administrators are currently configured.');
+    }else{
+      
+    }
+    
+    
     return false;
   }
   public function RequireSSL(){
