@@ -413,9 +413,12 @@ class Legba{
   public function User(){
     return $this->User;
   }
+ 
   
-
-
+  //OAuth
+  private function GetOAuthLoginBlob(){
+    return '<!-- No OAuth Providers Are Currently Enabled. -->';
+  }
   
   //Default Pages
   public function DefaultPage_PublicHome(){
@@ -427,7 +430,10 @@ class Legba{
     //Show login page from template
     $Page = $this->GetPageFromTemplate($LoginPagePath);
     
-    //TODO insert OAuth blob
+    //Insert OAuth blob
+    $OAuthBlob = $this->GetOAuthLoginBlob(); 
+    
+    $Page = str_replace('<!-- Insert OAuth Options Here -->', $OAuthBlob, $Page);
     
     $this->Event('Showing Page From Template: '.$LoginPagePath);
     echo $Page;
