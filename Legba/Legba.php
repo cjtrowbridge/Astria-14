@@ -423,16 +423,28 @@ class Legba{
     $this->ShowPageFromTemplate('Legba/Pages/PublicHome.html');
   }
   public function DefaultPage_Login(){
+    $LoginPagePath = 'Legba/Pages/Login.html';
     //Show login page from template
-    $this->ShowPageFromTemplate('Legba/Pages/Login.html');
+    $Page = $this->GetPageFromTemplate($LoginPagePath);
+    
+    //TODO insert OAuth blob
+    
+    $this->Event('Showing Page From Template: '.$LoginPagePath);
+    echo $Page;
+    $this->Event('end');
+    exit;
   }
   public function DefaultPage_UserHome(){
     //Show user home page from template
     $this->ShowPageFromTemplate('Legba/Pages/UserHome.html');
   }
+  
+  public function GetPageFromTemplate($File){
+    return file_get_contents($File);
+  }
   public function ShowPageFromTemplate($File){
     $this->Event('Showing Page From Template: '.$File);
-    echo file_get_contents($File);
+    echo $this->GetPageFromTemplate($File);
     $this->Event('end');
     exit;
   }
