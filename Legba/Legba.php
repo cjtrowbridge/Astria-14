@@ -388,7 +388,6 @@ class Legba{
     echo $this->ArrTabler($this->Debug);
     echo '<hr><h4>Events</h4>';
     echo $this->pd($this->Events);
-    
   }
   public function ShowRuntimeErrors(){
     error_reporting(E_ALL);
@@ -427,15 +426,13 @@ class Legba{
   }
   public function DefaultPage_Login(){
     $LoginPagePath = 'Legba/Pages/Login.html';
-    //Show login page from template
+    //Get the contents of the login page from template
     $Page = $this->GetPageFromTemplate($LoginPagePath);
-    
     //Insert OAuth blob
     $OAuthBlob = $this->GetOAuthLoginBlob(); 
-    
     $Page = str_replace('<!-- Insert OAuth Options Here -->', $OAuthBlob, $Page);
-    
     $this->Event('Showing Page From Template: '.$LoginPagePath);
+    //Show the modified page including the OAuth blob
     echo $Page;
     $this->Event('end');
     exit;
@@ -444,7 +441,6 @@ class Legba{
     //Show user home page from template
     $this->ShowPageFromTemplate('Legba/Pages/UserHome.html');
   }
-  
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
   }
