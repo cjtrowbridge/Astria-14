@@ -14,11 +14,14 @@ Likewise there should be a simple format which describes the columns, etc.
 
 class RDB{
   
+  Private $Legba = false;
   private $Credentials = false;
   private $Type = false;
   private $Resource = false;
   
-  function __construct(&$Legba, $ConfigPath){
+  function __construct(&$L, $ConfigPath){
+    
+    $this->$Legba = $L;
     
     if(!(file_exists($ConfigPath))){
       //TODO maybe this should not be a fatal error?
@@ -26,13 +29,13 @@ class RDB{
     }
     
     $this->Credentials = array(
-      'Hostname' => $Legba->Config( $ConfigPath, 'Hostname' ),
-      'Username' => $Legba->Config( $ConfigPath, 'Username' ),
-      'Password' => $Legba->Config( $ConfigPath, 'Password' ),
-      'Database' => $Legba->Config( $ConfigPath, 'Database' )
+      'Hostname' => $this->$Legba->Config( $ConfigPath, 'Hostname' ),
+      'Username' => $this->$Legba->Config( $ConfigPath, 'Username' ),
+      'Password' => $this->$Legba->Config( $ConfigPath, 'Password' ),
+      'Database' => $this->$Legba->Config( $ConfigPath, 'Database' )
     );
     
-    $this->Type = strtolower($Legba->Config( $ConfigPath, 'Type' ));
+    $this->Type = strtolower($this->$Legba->Config( $ConfigPath, 'Type' ));
     
     switch($this->Type){
       
@@ -56,8 +59,8 @@ class RDB{
     //TODO this should eventually be secured within the user session and reference the user's permissions.
     //TODO also the database should be renamable with some kind of alias instead of using just its name.
     $Route = 'schema/'.$this->Credentials['Database'];
-    $Legba->Hook('Before Login - SSL', $Route, array($this,'DescribeSchema') );
-    $Legba->Event("Hooked Schema Describer Onto Route '".$Route."'");
+    $this->$Legba->Hook('Before Login - SSL', $Route, array($this,'DescribeSchema') );
+    $this->$Legba->Event("Hooked Schema Describer Onto Route '".$Route."'");
     
   }
   
