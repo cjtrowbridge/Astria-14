@@ -290,7 +290,7 @@ class Legba{
             is_callable($Callback[0])
           ){
             //This will automatically call the class referenced by the first element and the method referenced by the second element.
-            call_user_func($Callback)
+            call_user_func($Callback);
           }else{
             //Or else just evaluate the callback
             eval($Callback);
