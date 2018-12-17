@@ -331,8 +331,10 @@ class Legba{
       $Route !== $_GET['route'] &&
       $Route !== 'Any'
     ){
+       $this->Event("Hook: Skipped Because Of Route Mismatch '".$Route."', '".var_export($Callback,true)."'");
       return false;
     }
+    $this->Event("Hooked: '".var_export($Callback,true)."'");
     
     //Hook a callback onto an event name
     if(is_string($Event)){
