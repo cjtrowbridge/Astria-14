@@ -74,7 +74,9 @@ class RDB{
     switch($this->Type){
       case 'mysql':
         $Tables = $this->Query('show tables');
-        pd($Tables);
+        echo '<pre>';
+        var_dump($Tables);
+        echo '</pre>';
         return $Tables;
         
       default:
