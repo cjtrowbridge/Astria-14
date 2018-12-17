@@ -167,6 +167,10 @@ class RDB{
   }
   
   //Describe a table within this schema
+  public function DescribeThisTable(){
+    $Table = $this->Legba->Route(2);
+    DescribeTable($Table);
+  }
   public function DescribeTable($Table){
     if(!(in_array($Table,$this->ListTables()))){
       die('Describe Invalid Table: '.$Table);
@@ -176,7 +180,7 @@ class RDB{
         <div class="col-12">
           <h1>Database '.$this->Credentials['Database'].'</h1>
           <h2>Table '.$Table.'</h2>
-          '.$this->Legba->SimplePage($Contents).'
+          '.$this->Legba->getTableDescription($Table).'
         </div>
       </div>
     </div>
