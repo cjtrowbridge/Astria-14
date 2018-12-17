@@ -180,7 +180,7 @@ class RDB{
         <div class="col-12">
           <h1>Database '.$this->Credentials['Database'].'</h1>
           <h2>Table '.$Table.'</h2>
-          '.$this->getTableDescription($Table).'
+          <pre>'.$this->getTableDescription($Table).'</pre>
         </div>
       </div>
     </div>
