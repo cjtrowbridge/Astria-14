@@ -176,7 +176,7 @@ class RDB{
         <div class="col-12">
           <h1>Database '.$this->Credentials['Database'].'</h1>
           <h2>Table '.$Table.'</h2>
-          '.$this->Legba->SimplePage($Contents);.'
+          '.$this->Legba->SimplePage($Contents).'
         </div>
       </div>
     </div>
