@@ -52,6 +52,11 @@ class RDB{
       
     }
     
+    //Load the route for description of this schema
+    //TODO this should eventually be secured within the user session and reference the user's permissions.
+    //TODO also the database should be renamable with some kind of alias instead of using just its name.
+    $Legba->Hook('Before Login - SSL', 'schema/'.$this->Credentials['Database'], array($this,'DescribeSchema') );
+    
   }
   
   //Return the Type of this database
@@ -97,6 +102,13 @@ class RDB{
       default:
         die('Invalid Database Type: '.$this->Type);
     }
+  }
+  
+  //Describe this schema
+  public function DescribeSchema(){
+    echo '<h1>Database: '.$this->Credentials['Database'].'</h1>';
+    
+    //TODO more thorough description
   }
   
   
