@@ -58,7 +58,7 @@ class RDB{
     //Load the route for description of this schema
     //TODO this should eventually be secured within the user session and reference the user's permissions.
     //TODO also the database should be renamable with some kind of alias instead of using just its name.
-    $Event = 'Before Login - SSL'
+    $Event = 'Before Login - SSL';
     $Route = 'schema/'.$this->Credentials['Database'];
     $this->Legba->Hook($Event, $Route, array($this,'DescribeSchema') );
     foreach($this->ListTables() as $Table){
