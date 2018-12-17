@@ -114,14 +114,14 @@ class RDB{
     $Contents=' <div class="container">
     <div class="row">
       <div class="col-12">
+        <h1>Database: '.$this->Credentials['Database'].'</h1>
+        <h2>Tables</h2>
         ';
-    $Contents.= '<h1>Database: '.$this->Credentials['Database'].'</h1>'.PHP_EOL;
-    $Contents.= '<h2>Tables</h2>'.PHP_EOL;
     
     $Tables = $this->ListTables();
     $Contents.=  $this->Legba->ArrTabler($Tables);
     
-    $Contents=' </div>
+    $Contents.=' </div>
       </div>
     </div>
         ';
