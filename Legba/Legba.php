@@ -466,6 +466,7 @@ class Legba{
     $Template = $this->GetPageFromTemplate($File);
     $Template = str_replace('[TITLE]',$Title,$Template);
     $Template = str_replace('[CONTENTS]',$Contents,$Template);
+    echo $Template;
     $this->Event('end');
     exit;
   }
