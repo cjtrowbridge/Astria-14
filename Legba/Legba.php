@@ -21,6 +21,10 @@ class Legba{
     //Create a new id for this thread.
     $this->ThreadID = Legba::sha256(uniqid(true));
     
+    //If Astria is being executed on the command line, initialize missing superglobals.
+    if(!(isset($_SERVER['REQUEST_URI']))){
+      $_SERVER['REQUEST_URI']='';
+    }
     
     //Figure out the route and set a global variable in case htaccess is not available.
     if(!(isset($_GET['route']))){
