@@ -284,7 +284,6 @@ class Legba{
       foreach($this->Events[$Name] as $Callback){
         /* Note that the callback is evaluated, and as such can be any php script, but must be syntactically complete. ie: "foo();" */
         try{
-          /*
           //Possibly call a class reference 
           if(
             (is_array($Callback))&&
@@ -294,9 +293,8 @@ class Legba{
             call_user_func($Callback)
           }else{
             //Or else just evaluate the callback
-            */
             eval($Callback);
-          //}
+          }
         }catch(Exception $e){
           if(
             $this->MayI('Verbose')&&
