@@ -172,7 +172,7 @@ class RDB{
     $Contents=' <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1>Database '.$this->Credentials['Database'].'</h1>
+          <h1><a href="../">Database '.$this->Credentials['Database'].'</a></h1>
           <h2>Table '.$Table.'</h2>
           <pre>'.$this->getTableDescription($Table).'</pre>
         </div>
