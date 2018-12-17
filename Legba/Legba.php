@@ -284,7 +284,19 @@ class Legba{
       foreach($this->Events[$Name] as $Callback){
         /* Note that the callback is evaluated, and as such can be any php script, but must be syntactically complete. ie: "foo();" */
         try{
-          eval($Callback);
+          /*
+          //Possibly call a class reference 
+          if(
+            (is_array($Callback))&&
+            is_callable($Callback[0])
+          ){
+            //This will automatically call the class referenced by the first element and the method referenced by the second element.
+            call_user_func($Callback)
+          }else{
+            //Or else just evaluate the callback
+            */
+            eval($Callback);
+          //}
         }catch(Exception $e){
           if(
             $this->MayI('Verbose')&&
