@@ -110,12 +110,8 @@ class RDB{
   public function DescribeSchema(){
     echo '<h1>Database: '.$this->Credentials['Database'].'</h1>'.PHP_EOL;
     echo '<h2>Tables</h2>'.PHP_EOL;
-    echo '<ul>'.PHP_EOL;
     $Tables = $this->ListTables();
-    foreach($Tables as $Table){
-      echo '  <li>'.$Table.'</li>'.PHP_EOL;
-    }
-    echo '</ul>'.PHP_EOL;
+    echo ArrTabler($Tables);
     
   }
   
