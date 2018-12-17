@@ -338,7 +338,8 @@ class Legba{
        $this->Event("Hook: Skipped Because Of Route Mismatch '".$Route."'... Curent Route Is: ".$_GET['route']);
       return false;
     }
-    $this->Event("Hooked: '".var_export($Callback,true)."'");
+    //TODO come up with some kind of description.
+    $this->Event("Hooked:");
     
     //Hook a callback onto an event name
     if(is_string($Event)){
