@@ -459,6 +459,14 @@ class Legba{
     $this->Event('end');
     exit;
   }
+  public function SimplePage($Contents, $Title = 'Astria 14'){
+    //Show simple page from template
+    $File = 'Legba/Pages/BlankPage.html';
+    $this->Event('Showing Page From Template: '.$File);
+    echo $this->GetPageFromTemplate($File);
+    $this->Event('end');
+    exit;
+  }
   public function DefaultPage_UserHome(){
     //Show user home page from template
     $this->ShowPageFromTemplate('Legba/Pages/UserHome.html');
