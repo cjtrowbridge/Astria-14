@@ -25,6 +25,9 @@ class Legba{
     if(!(isset($_SERVER['REQUEST_URI']))){
       $_SERVER['REQUEST_URI']='';
     }
+    if(!(isset($_SERVER['HTTP_HOST']))){
+      $_SERVER['HTTP_HOST']='localhost';
+    }
     
     //Figure out the route and set a global variable in case htaccess is not available.
     if(!(isset($_GET['route']))){
