@@ -169,7 +169,7 @@ class RDB{
   //Describe a table within this schema
   public function DescribeThisTable(){
     $Table = $this->Legba->Route(2);
-    DescribeTable($Table);
+    $this->DescribeTable($Table);
   }
   public function DescribeTable($Table){
     if(!(in_array($Table,$this->ListTables()))){
