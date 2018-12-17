@@ -57,7 +57,7 @@ class Legba{
         'RAM'         => $RAM,
         'ΔRAM'   => 0,
         'Time'        => $Time,
-        'ΔT'  => 0
+        'ΔTime'  => 0
       )
     );
     
