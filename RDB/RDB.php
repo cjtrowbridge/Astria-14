@@ -73,12 +73,14 @@ class RDB{
   public function ListTables(){
     switch($this->Type){
       case 'mysql':
-        $Tables = $this->Query('show tables');
-        echo '<pre>';
-        var_dump($Tables);
-        echo '</pre>';
+        $Results = $this->Query('show tables');
+        $Tables = array();
+        foreach($Results as $Row => $Array){
+          foreach($Array as $Key => $Value){
+            $Tables[]=$Value;
+          }
+        }
         return $Tables;
-        
       default:
         die('Invalid Database Type: '.$this->Type);
     }
