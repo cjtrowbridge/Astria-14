@@ -463,7 +463,9 @@ class Legba{
     //Show simple page from template
     $File = 'Legba/Pages/BlankPage.html';
     $this->Event('Showing Page From Template: '.$File);
-    echo $this->GetPageFromTemplate($File);
+    $Template = $this->GetPageFromTemplate($File);
+    $Template = str_replace('[TITLE]',$Title,$Template);
+    $Template = str_replace('[CONTENTS]',$Contents,$Template);
     $this->Event('end');
     exit;
   }
