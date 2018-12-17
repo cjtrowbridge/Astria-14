@@ -57,7 +57,7 @@ class RDB{
     //TODO also the database should be renamable with some kind of alias instead of using just its name.
     $Route = 'schema/'.$this->Credentials['Database'];
     $Legba->Hook('Before Login - SSL', $Route, array($this,'DescribeSchema') );
-    $Event("Hooked Schema Describer Onto Route '".$Route."' For Database '".$this->Credentials['Database']."'");
+    $Event("Hooked Schema Describer Onto Route '".$Route."'");
     
   }
   
