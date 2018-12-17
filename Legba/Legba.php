@@ -334,7 +334,7 @@ class Legba{
       $Route !== $_GET['route'] &&
       $Route !== 'Any'
     ){
-       $this->Event("Hook: Skipped Because Of Route Mismatch '".$Route."'");
+       $this->Event("Hook: Skipped Because Of Route Mismatch '".$Route."'... Curent Route Is: ".$_GET['route']);
       return false;
     }
     $this->Event("Hooked: '".var_export($Callback,true)."'");
