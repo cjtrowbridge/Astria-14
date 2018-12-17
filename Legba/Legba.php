@@ -281,7 +281,7 @@ class Legba{
     
     //Trigger the callbacks hooked to a particular event name
     if(isset($this->Events[$Name])){
-      foreach($this->Events[$Name] as $Callback){
+      foreach($this->Events[$Name] as $Key => $Callback){
         /* Note that the callback is evaluated, and as such can be any php script, but must be syntactically complete. ie: "foo();" */
         try{
           //Possibly call a class reference 
@@ -291,6 +291,7 @@ class Legba{
           ){
             //This will automatically call the class referenced by the first element and the method referenced by the second element.
             call_user_func($Callback);
+            $this->Events[$Name][$Key]=array();
           }else{
             //Or else just evaluate the callback
             eval($Callback);
