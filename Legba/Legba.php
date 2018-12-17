@@ -105,6 +105,13 @@ class Legba{
   
   //Accessor/Mutator Functions
   //TODO make the default table arguments come from a config setting.
+  public function Route($Index = false){
+    if($Index == false){
+      return $this->Route;
+    }else{
+      return $this->Route[$Index];
+    }
+  }
   public function ArrTabler($arr, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
     $return='';
     if($table_id==null){
