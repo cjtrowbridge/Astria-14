@@ -58,9 +58,14 @@ class RDB{
     //Load the route for description of this schema
     //TODO this should eventually be secured within the user session and reference the user's permissions.
     //TODO also the database should be renamable with some kind of alias instead of using just its name.
+    $Event = 'Before Login - SSL'
     $Route = 'schema/'.$this->Credentials['Database'];
-    $this->Legba->Hook('Before Login - SSL', $Route, array($this,'DescribeSchema') );
-    $this->Legba->Event("Hooked Schema Describer Onto Route '".$Route."'");
+    $this->Legba->Hook($Event, $Route, array($this,'DescribeSchema') );
+    foreach($this->ListTables() as $Table){
+      $Route = 'schema/'.$this->Credentials['Database'].'/'.$Table;
+      $this->Legba->Hook($Event, $Route, array($this,'DescribeThisTable') );
+    }
+    
     
   }
   
@@ -81,6 +86,29 @@ class RDB{
           }
         }
         return $Tables;
+      default:
+        die('Invalid Database Type: '.$this->Type);
+    }
+  }
+  
+  //Describe the columns in a table
+  public function getTableDescription($Table){
+    switch($this->Type){
+      case 'mysql':
+        
+        if(!(in_array($Table,$this->ListTables()))){
+          die('Describe Invalid Table: '.$Table);
+        }
+        
+        $Results = $this->Query('DESCRIBE '.$Table);
+        $Description = '';
+        foreach($Results as $Row => $Array){
+          foreach($Array as $Key => $Value){
+            $Description.=$Value.PHP_EOL;
+          }
+        }
+        $Description = trim($Description);
+        return $Description;
       default:
         die('Invalid Database Type: '.$this->Type);
     }
@@ -117,31 +145,43 @@ class RDB{
   //Describe this schema
   public function DescribeSchema(){
     $Contents=' <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Database '.$this->Credentials['Database'].'</h1>
-        <h2>Tables:</h2>
-        <ul>
-          ';
-    
-    $Tables = $this->ListTables();
-    foreach($Tables as $Key => $Value){
-      $Contents.='
-            <li><a href="'.$Value.'">'.$Value.'</a></li>
-      ';
-    }
-    
-    $Contents.=' 
+      <div class="row">
+        <div class="col-12">
+          <h1>Database '.$this->Credentials['Database'].'</h1>
+          <h2>Tables:</h2>
+          <ul>
+            ';
+      $Tables = $this->ListTables();
+      foreach($Tables as $Key => $Value){
+        $Contents.='
+              <li><a href="'.$Value.'">'.$Value.'</a></li>
+        ';
+      }
+      $Contents.=' 
           </ul>
         </div>
       </div>
     </div>
-        ';
-    
+    ';
     $this->Legba->SimplePage($Contents);
-    
   }
   
-  
+  //Describe a table within this schema
+  public function DescribeTable($Table){
+    if(!(in_array($Table,$this->ListTables()))){
+      die('Describe Invalid Table: '.$Table);
+    }
+    $Contents=' <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Database '.$this->Credentials['Database'].'</h1>
+          <h2>Table '.$Table.'</h2>
+          '.$this->Legba->SimplePage($Contents);.'
+        </div>
+      </div>
+    </div>
+    ';
+    $this->Legba->SimplePage($Contents);
+  }
 
 }
