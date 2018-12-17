@@ -59,8 +59,8 @@ class RDB{
     //TODO this should eventually be secured within the user session and reference the user's permissions.
     //TODO also the database should be renamable with some kind of alias instead of using just its name.
     $Route = 'schema/'.$this->Credentials['Database'];
-    $this->$Legba->Hook('Before Login - SSL', $Route, array($this,'DescribeSchema') );
-    $this->$Legba->Event("Hooked Schema Describer Onto Route '".$Route."'");
+    $this->Legba->Hook('Before Login - SSL', $Route, array($this,'DescribeSchema') );
+    $this->Legba->Event("Hooked Schema Describer Onto Route '".$Route."'");
     
   }
   
@@ -114,7 +114,7 @@ class RDB{
     echo '<h1>Database: '.$this->Credentials['Database'].'</h1>'.PHP_EOL;
     echo '<h2>Tables</h2>'.PHP_EOL;
     $Tables = $this->ListTables();
-    echo $Legba->ArrTabler($Tables);
+    echo $this->Legba->ArrTabler($Tables);
     
   }
   
