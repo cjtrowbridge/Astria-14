@@ -101,13 +101,7 @@ class RDB{
         }
         
         $Results = $this->Query('DESCRIBE '.$Table);
-        $Description = '';
-        foreach($Results as $Row => $Array){
-          foreach($Array as $Key => $Value){
-            $Description.=$Value.PHP_EOL;
-          }
-        }
-        $Description = trim($Description);
+        $Description = $this->Legba->ArrTabler($Results);
         return $Description;
       default:
         die('Invalid Database Type: '.$this->Type);
