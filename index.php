@@ -8,6 +8,12 @@ $Legba = new Legba();
 //Include the relational database management class.
 include('RDB/RDB.php');
 
+//This is probably a temporary solution. If there is a Config.php file in the root of the application directory, then include it. 
+//TODO This should be replaced by a first-time set up wizard at a later stage in the app's development journey.
+if(file_exists('Config.php')){
+  include('Config.php');
+}
+
 //Check the main Legba configuration file to see whether SSL is required for all connections...
 if($Legba->Config('Legba/Config.php','Allow Non-Secure Connections') != true){
   //This function requires the current connection to use SSL. If it is not, it will be redirected to a secure connection.
