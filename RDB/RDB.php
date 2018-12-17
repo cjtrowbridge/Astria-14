@@ -21,7 +21,7 @@ class RDB{
   
   function __construct(&$L, $ConfigPath){
     
-    $this->$Legba = $L;
+    $this->Legba = $L;
     
     if(!(file_exists($ConfigPath))){
       //TODO maybe this should not be a fatal error?
@@ -29,13 +29,13 @@ class RDB{
     }
     
     $this->Credentials = array(
-      'Hostname' => $this->$Legba->Config( $ConfigPath, 'Hostname' ),
-      'Username' => $this->$Legba->Config( $ConfigPath, 'Username' ),
-      'Password' => $this->$Legba->Config( $ConfigPath, 'Password' ),
-      'Database' => $this->$Legba->Config( $ConfigPath, 'Database' )
+      'Hostname' => $this->Legba->Config( $ConfigPath, 'Hostname' ),
+      'Username' => $this->Legba->Config( $ConfigPath, 'Username' ),
+      'Password' => $this->Legba->Config( $ConfigPath, 'Password' ),
+      'Database' => $this->Legba->Config( $ConfigPath, 'Database' )
     );
     
-    $this->Type = strtolower($this->$Legba->Config( $ConfigPath, 'Type' ));
+    $this->Type = strtolower($this->Legba->Config( $ConfigPath, 'Type' ));
     
     switch($this->Type){
       
