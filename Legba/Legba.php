@@ -328,6 +328,7 @@ class Legba{
     
     //Trim route to be consistent with the event method.
     $Route = trim($Route, '/');
+    if(!(substr($Route, -1)=='/')){$Route.='/';}
     
     //The Callback should be hooked onto the event only when the specified route matches the current route, or 'Any.'
     if(
