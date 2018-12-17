@@ -111,7 +111,7 @@ class RDB{
     echo '<h1>Database: '.$this->Credentials['Database'].'</h1>'.PHP_EOL;
     echo '<h2>Tables</h2>'.PHP_EOL;
     $Tables = $this->ListTables();
-    echo ArrTabler($Tables);
+    echo $Legba->ArrTabler($Tables);
     
   }
   
