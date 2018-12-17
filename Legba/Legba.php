@@ -291,7 +291,8 @@ class Legba{
           ){
             //This will automatically call the class referenced by the first element and the method referenced by the second element.
             call_user_func($Callback);
-            $this->Events[$Name][$Key]=array();
+            //Remove the callback reference so that PHP will not display its contents
+            $this->Events[$Name][$Key]=array('Callback');
           }else{
             //Or else just evaluate the callback
             eval($Callback);
