@@ -55,9 +55,9 @@ class Legba{
         'Route'       => $_GET['route'],
         'Event'       => 'Legba Constructor',
         'RAM'         => $RAM,
-        'Delta-RAM'   => 0,
+        'ΔRAM'   => 0,
         'Time'        => $Time,
-        'Delta-Time'  => 0
+        'ΔT'  => 0
       )
     );
     
@@ -272,9 +272,9 @@ class Legba{
       'Route'       => $_GET['route'],
       'Event'       => $Name,
       'RAM'         => $RAM,
-      'Delta-RAM'   => round($RAM  - $Previous['RAM'],4),
+      'ΔRAM'   => round($RAM  - $Previous['RAM'],4),
       'Time'        => $Time,
-      'Delta-Time'  => round($Time - $Previous['Time'],4)
+      'ΔTime'  => round($Time - $Previous['Time'],4)
     );
     $this->Debug[]=$EventDebug;
     
