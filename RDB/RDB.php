@@ -111,10 +111,22 @@ class RDB{
   
   //Describe this schema
   public function DescribeSchema(){
-    echo '<h1>Database: '.$this->Credentials['Database'].'</h1>'.PHP_EOL;
-    echo '<h2>Tables</h2>'.PHP_EOL;
+    $Contents=' <div class="container">
+    <div class="row">
+      <div class="col-12">
+        ';
+    $Contents.= '<h1>Database: '.$this->Credentials['Database'].'</h1>'.PHP_EOL;
+    $Contents.= '<h2>Tables</h2>'.PHP_EOL;
+    
     $Tables = $this->ListTables();
-    echo $this->Legba->ArrTabler($Tables);
+    $Contents.=  $this->Legba->ArrTabler($Tables);
+    
+    $Contents=' </div>
+      </div>
+    </div>
+        ';
+    
+    $this->Legba->SimplePage($Contents);
     
   }
   
