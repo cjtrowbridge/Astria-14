@@ -148,7 +148,7 @@ class RDB{
       $Tables = $this->ListTables();
       foreach($Tables as $Key => $Value){
         $Contents.='
-              <li><a href="'.$Value.'">'.$Value.'</a></li>
+              <li><a href="/schema/'.$this->Credentials['Database'].'/'.$Value.'/">'.$Value.'</a></li>
         ';
       }
       $Contents.=' 
@@ -172,9 +172,9 @@ class RDB{
     $Contents=' <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1><a href="../">Database '.$this->Credentials['Database'].'</a></h1>
+          <h1><a href="/schema/'.$this->Credentials['Database'].'/">Database '.$this->Credentials['Database'].'</a></h1>
           <h2>Table '.$Table.'</h2>
-          <pre>'.$this->getTableDescription($Table).'</pre>
+          '.$this->getTableDescription($Table).'
         </div>
       </div>
     </div>
