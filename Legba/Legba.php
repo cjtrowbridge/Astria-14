@@ -223,6 +223,9 @@ class Legba{
     }
   }
   public function SaveConfig($File, $Key, $NewValue){
+    
+    //TODO do not save if nothing has changed. This wastes time doing slow disk operations.
+    
     $this->BackupConfig($File);
     $this->Event('Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     //Set the given key to the given value in the given file. Return true or false regarding success of saving.
