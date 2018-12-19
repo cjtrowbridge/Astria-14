@@ -581,7 +581,7 @@ class Legba{
     if($DefaultAdministrators==false){
       //No default administrators are currently configured so this user is the first user. Add them to the default administrators list in the Legba Config file.
       //TODO this should not work if a user database has been connected. This is only for initial setup purposes.
-      $this->SaveConfig('Legba/Config.php','Default Administrators',array($Email=>$_POST['inputPassword']));
+      $this->SaveConfig('Legba/Config.php','Default Administrators',array($_POST['inputEmail']=>$_POST['inputPassword']));
       $this->ValidateUser($Email,'Administrator');
       
     }else{
