@@ -462,6 +462,9 @@ class Legba{
     //Hook default pages to events.
     $this->Event('Hooking default pages onto routes as configured...');
     
+    if($this->Config('Legba/Pages/Config.php','Use Legba Logout',true) == true){
+      $this->Hook('Before Login - SSL', 'logout/', '$this->Logout();');
+    }
     if($this->Config('Legba/Pages/Config.php','Use Legba Login Page',true) == true){
       $this->Hook('Not Logged In - Show Content', 'login/', '$this->DefaultPage_Login();');
     }
@@ -606,6 +609,12 @@ class Legba{
       'Role'  => $Role
     );
     
+  }
+  public function Logout(){
+    session_destroy();
+    $this->Event('Log Out');
+    header('Location: /');
+    exit;
   }
 
 }
