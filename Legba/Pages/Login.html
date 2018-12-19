@@ -14,17 +14,23 @@
 
   </head>
 
-  <body class="text-center">
-    <form class="form" action="/login" method="post">
-      
-      <h1 class="h3 mb-3">Please Log In</h1>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <input type="submit" value="Log In" class="form-control btn btn-block btn-primary">
-      <a href="/signup" class="form-control btn btn-block btn-primary">Sign Up</a>
-      
-      <!-- Insert OAuth Options Here -->
-      
-    </form>
+  <body>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <form class="form" action="/login" method="post">
+            <h1 class="h3 mb-3">Please Log In</h1>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="submit" value="Log In" class="form-control btn btn-block btn-primary">
+            <a href="/signup" class="form-control btn btn-block btn-primary">Sign Up</a>
+
+            <!-- Insert OAuth Options Here -->
+
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
