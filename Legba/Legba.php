@@ -535,6 +535,12 @@ class Legba{
     )){
       die('Missing Fields. Unable to Process Signup.');
     }
+      
+    $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
+    if($DefaultAdministrators==false){
+      $this->Event('No default administrators are currently configured.');
+    } 
+    var_dump($DefaultAdministrators);
     //TODO
     die('Signup Processed!');
   }
