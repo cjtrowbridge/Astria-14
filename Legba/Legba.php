@@ -440,7 +440,13 @@ class Legba{
     echo '<hr><h4>Route: '.$_GET['route'].'</h4>';
     echo '<h4>Runtime: '.$Runtime.' sec</h4>';
     echo '<h4>Memory: '.$RAM.' mb</h4>';
-    echo '<h4>Session Verbosity: '.$_SESSION['Verbose'].'</h4>';
+    echo '<h4>Session Verbosity: ';
+    if(isset($_SESSION['Verbose'])){
+      echo $_SESSION['Verbose'];
+    }else{
+      echo 'unset';
+    }
+    echo '</h4>';
     echo '<hr><h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
     echo '<hr><h4>Events</h4>';
