@@ -398,6 +398,20 @@ class Legba{
     return false;
   }
   public function LoggedIn(){
+    if(
+      (isset($_POST['inputEmail']))&&
+      (isset($_POST['inputPassword']))&&
+      (isset($_POST['inputPasswordConfirm']))
+    ){
+      $this->ProcessSignup();
+    }
+    if(
+      (isset($_POST['inputEmail']))&&
+      (isset($_POST['inputPassword']))
+    ){
+      $this->ProcessLogin();
+    }
+    
     //Check whether a user is currently logged in and authenticated. Return user or false.
     if(!(isset($_SESSION['User']['Email']))){
       return false;
@@ -500,13 +514,7 @@ class Legba{
     $this->ShowPageFromTemplate('Legba/Pages/PublicHome.html');
   }
   public function DefaultPage_Signup(){
-    if(
-      (isset($_POST['inputEmail']))&&
-      (isset($_POST['inputPassword']))&&
-      (isset($_POST['inputPasswordConfirm']))
-    ){
-      $this->ProcessSignup();
-    }
+    
     $SignupPagePath = 'Legba/Pages/Signup.html';
     //Get the contents of the signup page from template
     $Page = $this->GetPageFromTemplate($SignupPagePath);
@@ -520,12 +528,7 @@ class Legba{
     exit;
   }
   public function DefaultPage_Login(){
-    if(
-      (isset($_POST['inputEmail']))&&
-      (isset($_POST['inputPassword']))
-    ){
-      $this->ProcessLogin();
-    }
+    
     $LoginPagePath = 'Legba/Pages/Login.html';
     //Get the contents of the login page from template
     $Page = $this->GetPageFromTemplate($LoginPagePath);
@@ -651,6 +654,8 @@ class Legba{
         //TODO log failed attempts and ban IPs
       }
     }
+    header('Location: /');
+    exit;
   }
   public function ValidateUser($Email,$Role = false){
     //create a session for this user who has been validated through one of the login options.
