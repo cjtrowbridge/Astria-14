@@ -33,9 +33,10 @@ class Legba{
     ){
       $_SESSION['Verbose'] == $_GET['verbose'];
       $this->Event('Session verbosity set to '.$_GET['verbose']);
-    }
-    if($_SESSION['Verbose']=='on'){
-      $_GET['verbose']='on';
+    }else{
+      if($_SESSION['Verbose']=='on'){
+        $_GET['verbose']='on';
+      }
     }
     
     //If Astria is being executed on the command line, initialize missing superglobals.
