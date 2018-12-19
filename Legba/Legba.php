@@ -578,7 +578,6 @@ class Legba{
     
     //Check whether any first-time-setup admins have been added
     $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
-    $DefaultAdministrators=false;
     if($DefaultAdministrators==false){
       //No default administrators are currently configured so this user is the first user. Add them to the default administrators list in the Legba Config file.
       //TODO this should not work if a user database has been connected. This is only for initial setup purposes.
@@ -601,9 +600,17 @@ class Legba{
       (isset($_POST['inputPassword']))
     )){
       die('Missing Fields. Unable to Process Login.');
+    }else{
+      //TODO this should eventually also include a database lookup
+      $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
+      if($DefaultAdministrators[$_POST['inputEmail']]==$_POST['inputPassword']){
+        $this->ValidateUser($_POST['inputEmail'],'Administrator');
+      }else{
+        //TODO database lookup
+        die('Invalid User');
+        //TODO log failed attempts and ban IPs
+      }
     }
-    //TODO
-    die('Login Processed!');
   }
   public function ValidateUser($Email,$Role = false){
     //create a session for this user who has been validated through one of the login options.
