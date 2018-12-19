@@ -436,6 +436,9 @@ class Legba{
     if($this->Config('Legba/Pages/Config.php','Use Legba Login Page',true) == true){
       $this->Hook('Not Logged In - Show Content', 'login/', '$this->DefaultPage_Login();');
     }
+    if($this->Config('Legba/Pages/Config.php','Use Legba Signup Page',true) == true){
+      $this->Hook('Not Logged In - Show Content', 'signup/', '$this->DefaultPage_Signup();');
+    }
     if($this->Config('Legba/Pages/Config.php','Use Legba User Home Page',true) == true){
       $this->Hook('Logged In - Show Content', '/', '$this->DefaultPage_UserHome();');
     }
@@ -459,6 +462,19 @@ class Legba{
   public function DefaultPage_PublicHome(){
     //Show public home page from template
     $this->ShowPageFromTemplate('Legba/Pages/PublicHome.html');
+  }
+  public function DefaultPage_Signup(){
+    $SignupPagePath = 'Legba/Pages/Signup.html';
+    //Get the contents of the signup page from template
+    $Page = $this->GetPageFromTemplate($SignupPagePath);
+    //Insert OAuth blob
+    $OAuthBlob = $this->GetOAuthLoginBlob(); 
+    $Page = str_replace('<!-- Insert OAuth Options Here -->', $OAuthBlob, $Page);
+    $this->Event('Showing Page From Template: '.$LoginPagePath);
+    //Show the modified page including the OAuth blob
+    echo $Page;
+    $this->Event('end');
+    exit;
   }
   public function DefaultPage_Login(){
     $LoginPagePath = 'Legba/Pages/Login.html';
