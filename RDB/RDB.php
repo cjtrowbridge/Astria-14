@@ -20,7 +20,7 @@ class Schemas{
   
   public function ListSchemas(){
     $Output = array();
-    foreach($Schemas as $Name = $Resource){
+    foreach($Schemas as $Name => $Resource){
       $Output[]=$Name;
     }
     return $Output;
