@@ -35,7 +35,10 @@ class Legba{
       $_SESSION['Verbose'] = $_GET['verbose'];
       $this->Event('Session verbosity set to '.$_GET['verbose']);
     }else{
-      if($_SESSION['Verbose']=='on'){
+      if(
+        isset($_SESSION['Verbose'])&&
+        $_SESSION['Verbose']=='on'
+      ){
         $_GET['verbose']='on';
       }
     }
@@ -548,7 +551,25 @@ class Legba{
   }
   public function DefaultPage_UserHome(){
     //Show user home page from template
-    $this->ShowPageFromTemplate('Legba/Pages/UserHome.html');
+    $File='Legba/Pages/UserHome.html';
+    $this->Event('Showing Page From Template: '.$File);
+    $Template = $this->GetPageFromTemplate($File);
+    
+    $Template = str_replace('(!--Top Nav--)',       $this->UserTopNav(),       $Template);
+    $Template = str_replace('(!--Main Contents--)', $this->UserHomeContents(), $Template);
+    
+    echo $Template;
+    $this->Event('end');
+    exit;
+    
+  }
+  public function UserTopNav(){
+    $Output='';
+    return $Output;
+  }
+  public function UserHomeContents(){
+    $Output='';
+    return $Output;
   }
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
