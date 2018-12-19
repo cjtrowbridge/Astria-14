@@ -23,6 +23,20 @@ class Legba{
     //Create a new id for this thread.
     $this->ThreadID = Legba::sha256(uniqid(true));
     
+    //Check whether a verbosity flag is set
+    if(
+      isset($_GET['verbose'])&&
+      (
+        $_GET['verbose']=='on' ||
+        $_GET['verbose']=='off'
+      )
+    ){
+      $_SESSION['Verbose'] == $_GET['verbose'];
+    }
+    if($_SESSION['Verbose']=='on'){
+      $_GET['verbose']='';
+    }
+    
     //If Astria is being executed on the command line, initialize missing superglobals.
     if(!(isset($_SERVER['REQUEST_URI']))){
       $_SERVER['REQUEST_URI']='';
