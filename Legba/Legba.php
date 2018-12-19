@@ -470,7 +470,7 @@ class Legba{
     //Insert OAuth blob
     $OAuthBlob = $this->GetOAuthLoginBlob(); 
     $Page = str_replace('<!-- Insert OAuth Options Here -->', $OAuthBlob, $Page);
-    $this->Event('Showing Page From Template: '.$LoginPagePath);
+    $this->Event('Showing Page From Template: '.$SignupPagePath);
     //Show the modified page including the OAuth blob
     echo $Page;
     $this->Event('end');
