@@ -569,6 +569,9 @@ class Legba{
   }
   public function UserHomeContents(){
     $Output='';
+    global $Schemas;
+    $S = $Schemas->ListSchemas()
+    $Output.=var_export($S,true);
     return $Output;
   }
   public function GetPageFromTemplate($File){
