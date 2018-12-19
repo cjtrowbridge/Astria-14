@@ -31,6 +31,8 @@ $Legba->Event('Before Login - SSL');
 //Load any default pages as configured
 $Legba->DefaultPages();
 
+$Legba->Event('Before Login');
+
 //Check if the user is logged in, and process the login if they are trying to log in.
 if($Legba->LoggedIn()){
   //The user is logged in and authenticated.
