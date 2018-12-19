@@ -32,6 +32,7 @@ class Legba{
       )
     ){
       $_SESSION['Verbose'] == $_GET['verbose'];
+      $this->Event('Session verbosity set to '.$_GET['verbose']);
     }
     if($_SESSION['Verbose']=='on'){
       $_GET['verbose']='';
