@@ -565,13 +565,30 @@ class Legba{
   }
   public function UserTopNav(){
     $Output='';
+    
+    global $Schemas;
+    $S = $Schemas->ListSchemas();
+    $Output.='  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Schema
+        </a>
+        <div class="dropdown-menu" aria-labelledby="schemaDropdown">
+          ';
+    foreach($S as $Key => $Value){
+    $Output.='    <a class="dropdown-item" href="/schema/'.$Value.'">'.$Key.'</a>
+';
+    }
+    $Output.='
+        </div>
+      </li>
+    ';
+    
     return $Output;
   }
   public function UserHomeContents(){
     $Output='';
-    global $Schemas;
-    $S = $Schemas->ListSchemas();
-    $Output.=var_export($S,true);
+    
+    
     return $Output;
   }
   public function GetPageFromTemplate($File){
