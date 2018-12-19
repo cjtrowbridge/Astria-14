@@ -39,7 +39,7 @@ if($Legba->LoggedIn()){
   
   //If so configured, show this user any runtime errors. This is useful for admins.
   if($Legba->MayI('Show Runtime Errors')){
-    $Lebga->ShowRuntimeErrors();
+    $Legba->ShowRuntimeErrors();
   }
   
   //This event should be used for things that need to happen quickly and sometimes without showing a normal page. For example JSON endpoints or authenticated webhooks.
