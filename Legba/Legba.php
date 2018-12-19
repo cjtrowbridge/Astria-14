@@ -379,18 +379,11 @@ class Legba{
   }
   public function LoggedIn(){
     //Check whether a user is currently logged in and authenticated. Return user or false.
-    
-    //Get the list of default administrators from the Legba configuration file
-    $this->Event('Fetching list of default administrators...');
-    $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
-    if($DefaultAdministrators==false){
-      $this->Event('No default administrators are currently configured.');
-    }else{
-      
+    if(!(isset($_SESSION['User']['Email']))){
+      return false;
     }
     
-    
-    return false;
+    return true;
   }
   public function RequireSSL(){
     //If the current path is not an SSL path, then redirect to an SSL version of the current path.
@@ -402,6 +395,15 @@ class Legba{
     return true;
   }
   public function MayI($Name){
+    
+    //If user is an admin, they have all permissions.
+    if(
+      isset($_SESSION['User'])&&
+      $_SESSION['User']['Role']=='Administrator'
+    ){
+      return true;
+    }
+    
     //Check whether the user has a case-insensitive permission. Return true or false.
     $Name = strtolower($Name);
     //TODO
