@@ -611,8 +611,9 @@ class Legba{
     
   }
   public function Logout(){
-    session_destroy();
     $this->Event('Log Out');
+    session_destroy();
+    $_SESSION = [];
     header('Location: /');
     exit;
   }
