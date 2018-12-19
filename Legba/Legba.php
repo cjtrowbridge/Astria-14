@@ -444,6 +444,8 @@ class Legba{
     echo $this->ArrTabler($this->Debug);
     echo '<hr><h4>Events</h4>';
     echo $this->pd($this->Events);
+    echo '<hr><h4>Session</h4>';
+    $this->pd($_SESSION);
   }
   public function ShowRuntimeErrors(){
     error_reporting(E_ALL);
