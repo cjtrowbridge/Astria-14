@@ -8,8 +8,6 @@
 
 */
 
-session_start();
-
 class Legba{
   
   private $ThreadID = false;
@@ -20,6 +18,9 @@ class Legba{
   
   //Native class primitives
   function __construct(){
+    
+    session_start();
+    
     //Create a new id for this thread.
     $this->ThreadID = Legba::sha256(uniqid(true));
     
