@@ -12,6 +12,32 @@ Likewise there should be a simple format which describes the columns, etc.
 
 */
 
+global $Schemas;
+$Schemas = new Schemas();
+
+class Schemas{
+  private $Schemas = array();
+  
+  public function ListSchemas(){
+    $Output = array();
+    foreach($Schemas as $Name = $Resource){
+      $Output[]=$Name;
+    }
+    return $Output;
+  }
+  public function get($Name){
+    if(isset($this->Schemas[$Name])){
+      return $this->Schemas[$Name];
+    }else{
+      return false;
+    }
+  }
+  public function add($Name,$Resource){
+    $this->Schemas[$Name]=$Resource;
+  }
+  
+}
+
 class RDB{
   
   Private $Legba = false;
@@ -66,6 +92,9 @@ class RDB{
       $this->Legba->Hook($Event, $Route, array($this,'DescribeThisTable') );
     }
     
+    //Add to listener
+    global $Schemas;
+    $Schemas->add($this);
     
   }
   
