@@ -578,6 +578,7 @@ class Legba{
     
     //Check whether any first-time-setup admins have been added
     $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
+    $DefaultAdministrators=false;
     if($DefaultAdministrators==false){
       //No default administrators are currently configured so this user is the first user. Add them to the default administrators list in the Legba Config file.
       //TODO this should not work if a user database has been connected. This is only for initial setup purposes.
