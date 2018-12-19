@@ -464,6 +464,13 @@ class Legba{
     $this->ShowPageFromTemplate('Legba/Pages/PublicHome.html');
   }
   public function DefaultPage_Signup(){
+    if(
+      (isset($_POST['inputEmail']))&&
+      (isset($_POST['inputPassword']))&&
+      (isset($_POST['inputPasswordConfirm']))
+    ){
+      $this->ProcessSignup();
+    }
     $SignupPagePath = 'Legba/Pages/Signup.html';
     //Get the contents of the signup page from template
     $Page = $this->GetPageFromTemplate($SignupPagePath);
@@ -477,6 +484,12 @@ class Legba{
     exit;
   }
   public function DefaultPage_Login(){
+    if(
+      (isset($_POST['inputEmail']))&&
+      (isset($_POST['inputPassword']))
+    ){
+      $this->ProcessLogin();
+    }
     $LoginPagePath = 'Legba/Pages/Login.html';
     //Get the contents of the login page from template
     $Page = $this->GetPageFromTemplate($LoginPagePath);
@@ -512,6 +525,28 @@ class Legba{
     echo $this->GetPageFromTemplate($File);
     $this->Event('end');
     exit;
+  }
+  
+  public function ProcessSignup(){
+    if(!(
+      (isset($_POST['inputEmail']))&&
+      (isset($_POST['inputPassword']))&&
+      (isset($_POST['inputPasswordConfirm']))
+    )){
+      die('Missing Fields. Unable to Process Signup.');
+    }
+    //TODO
+    die('Signup Processed!');
+  }
+  public function ProcessLogin(){
+    if(!(
+      (isset($_POST['inputEmail']))&&
+      (isset($_POST['inputPassword']))
+    )){
+      die('Missing Fields. Unable to Process Login.');
+    }
+    //TODO
+    die('Login Processed!');
   }
   
 
