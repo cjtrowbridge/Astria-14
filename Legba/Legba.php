@@ -555,8 +555,8 @@ class Legba{
     $this->Event('Showing Page From Template: '.$File);
     $Template = $this->GetPageFromTemplate($File);
     
-    $Template = str_replace('(!--Top Nav--)',       $this->UserTopNav(),       $Template);
-    $Template = str_replace('(!--Main Contents--)', $this->UserHomeContents(), $Template);
+    $Template = str_replace('<!--Top Nav-->',       $this->UserTopNav(),       $Template);
+    $Template = str_replace('<!--Main Contents-->', $this->UserHomeContents(), $Template);
     
     echo $Template;
     $this->Event('end');
