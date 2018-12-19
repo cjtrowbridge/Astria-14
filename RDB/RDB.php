@@ -21,7 +21,8 @@ class Schemas{
   public function ListSchemas(){
     $Output = array();
     foreach($this->Schemas as $Name => $Resource){
-      $Output[]=$Name;
+      //TODO eventually the key should be an editable alias
+      $Output[$Name]=$Name;
     }
     return $Output;
   }
