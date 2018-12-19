@@ -94,7 +94,7 @@ class RDB{
     
     //Add to listener
     global $Schemas;
-    $Schemas->add($this);
+    $Schemas->add($this->Credentials['Database'],$this);
     
   }
   
