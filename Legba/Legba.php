@@ -8,6 +8,8 @@
 
 */
 
+session_start();
+
 class Legba{
   
   private $ThreadID = false;
@@ -528,6 +530,7 @@ class Legba{
   }
   
   public function ProcessSignup(){
+    //Verify required fields have been submitted.
     if(!(
       (isset($_POST['inputEmail']))&&
       (isset($_POST['inputPassword']))&&
@@ -535,14 +538,29 @@ class Legba{
     )){
       die('Missing Fields. Unable to Process Signup.');
     }
-      
+    
+    //Make sure passwords match.
+    if(!($_POST['inputPassword']==$_POST['inputPasswordConfirm'])){
+      die('Passwords do not match.');
+    }
+    
+    //Check whether any first-time-setup admins have been added
     $DefaultAdministrators = $this->Config('Legba/Config.php','Default Administrators');
     if($DefaultAdministrators==false){
-      $this->Event('No default administrators are currently configured.');
-    } 
-    var_dump($DefaultAdministrators);
-    //TODO
-    die('Signup Processed!');
+      //No default administrators are currently configured so this user is the first user. Add them to the default administrators list in the Legba Config file.
+      //TODO this should not work if a user database has been connected. This is only for initial setup purposes.
+      $this->SaveConfig('Legba/Config.php','Default Administrators',array($Email=>$_POST['inputPassword']));
+      $this->ValidateUser($Email,'Administrator');
+      
+    }else{
+      //TODO do a database lookup for the user and verify their identity
+      
+    }
+    
+    
+    
+    header('Location: /');
+    exit;
   }
   public function ProcessLogin(){
     if(!(
@@ -554,7 +572,14 @@ class Legba{
     //TODO
     die('Login Processed!');
   }
-  
+  public function ValidateUser($Email,$Role = false){
+    //create a session for this user who has been validated through one of the login options.
+    $_SESSION['User']=array(
+      'Email' => $Email,
+      'Role'  => $Role
+    );
+    
+  }
 
 }
   
