@@ -652,7 +652,7 @@ class Legba{
       </li>
       
     ';
-    $Output.=UserTopNavSchemaObjectsDropdown();
+    $Output.=$this->UserTopNavSchemaObjectsDropdown();
     
     return $Output;
   }
@@ -685,7 +685,6 @@ class Legba{
     $Output.='
         </div>
       </li>
-      <!--Schema Objects Dropdown-->
     ';
     
     return $Output;
