@@ -660,7 +660,7 @@ class Legba{
     $Output='';
     
     //This should only run if we are at the schema/x path
-    if((
+    if(!(
       ($this->Route(0)  == 'schema') &&
       ($this->Route(1) !== false)
     )){
