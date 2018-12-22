@@ -663,7 +663,7 @@ class Legba{
     //This should only run if we are at the schema/x path
     if(!(
       ($this->Route(0)  == 'schema') &&
-      ($this->Route(1) !=== false)
+      (!($this->Route(1) === false))
     )){
       return '<!--Select a schema to view list of objects-->';
     }
