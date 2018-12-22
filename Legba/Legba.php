@@ -679,8 +679,11 @@ class Legba{
         <div class="dropdown-menu" aria-labelledby="schemaDropdown">
           ';
     foreach($Tables as $Key => $Value){
-    $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'/'.$Value.'">'.$Value.'</a>
+      //TODO these Values should have configurable aliases
+      if($this->MayI('View Database Object '.$Database.'/'.$Value)){
+      $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'/'.$Value.'">'.$Value.'</a>
 ';
+      }
     }
     $Output.='
         </div>
