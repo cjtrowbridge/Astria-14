@@ -640,7 +640,7 @@ class Legba{
     $S = $Schemas->ListSchemas();
     $Output.='  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Schema
+          Database
         </a>
         <div class="dropdown-menu" aria-labelledby="schemaDropdown">
           ';
@@ -663,7 +663,7 @@ class Legba{
     //This should only run if we are at the schema/x path
     if(!(
       ($this->Route(0)  == 'schema') &&
-      ($this->Route(1) !== false)
+      ($this->Route(1) !=== false)
     )){
       return '<!--Select a schema to view list of objects-->';
     }
