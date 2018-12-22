@@ -659,8 +659,8 @@ class Legba{
   public function UserTopNavSchemaObjectsDropdown(){
     $Output='';
     
-    //This should only run if we are at the shchema/x path
-    if(!(
+    //This should only run if we are at the schema/x path
+    if((
       ($this->Route(0)  == 'schema') &&
       ($this->Route(1) !== false)
     )){
