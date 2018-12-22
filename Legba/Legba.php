@@ -147,8 +147,8 @@ class Legba{
     }
   }
   //TODO make the default table arguments come from a config setting.
-  public function Route($Index = false){
-    if($Index == false){
+  public function Route($Index = 'All'){
+    if($Index == 'All'){
       return $this->Route;
     }else{
       if(isset($this->Route[$Index])){
