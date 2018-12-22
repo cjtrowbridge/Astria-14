@@ -249,7 +249,7 @@ class RDB{
       </div>
     </div>
     
-    <div class="card" id="ShowMore">
+    <!--div class="card" id="ShowMore">
       <div class="card-body">
         <h5 class="card-title">Show How Many More?</h5>
         <div class="card-text">
@@ -260,7 +260,7 @@ class RDB{
           </form>
         </div>
       </div>
-    </div>
+    </div-->
     
     ';
     
