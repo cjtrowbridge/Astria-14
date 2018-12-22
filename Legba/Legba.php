@@ -147,15 +147,11 @@ class Legba{
     }
   }
   //TODO make the default table arguments come from a config setting.
-  public function Route($Index = 'All'){
-    if($Index == 'All'){
-      return $this->Route;
+  public function Route($Index){
+    if(isset($this->Route[$Index])){
+      return $this->Route[$Index];
     }else{
-      if(isset($this->Route[$Index])){
-        return $this->Route[$Index];
-      }else{
-        return false;
-      }
+      return false;
     }
   }
   public function ArrTabler($arr, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
