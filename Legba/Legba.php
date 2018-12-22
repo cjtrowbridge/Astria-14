@@ -15,6 +15,7 @@ class Legba{
   private $Events   = false;
   private $User     = false;
   private $Route    = false;
+  private $Applciation = array();
   
   //Native class primitives
   function __construct(){
@@ -133,6 +134,14 @@ class Legba{
 
   
   //Accessor/Mutator Functions
+  public function UpdateApplication($Array){
+    foreach($Array as $Key=>$Value){
+      $this->Application[$Key]=$Value;
+    }
+  }
+  public function Application(){
+    return $this->Application;
+  }
   //TODO make the default table arguments come from a config setting.
   public function Route($Index = false){
     if($Index == false){
@@ -541,25 +550,45 @@ class Legba{
     $this->Event('end');
     exit;
   }
-  public function SimplePage($Contents, $Title = 'Astria 14'){
+  public function SimplePage($Contents, $Title = false){
+    if($Title==false){
+      $Title = $this->Application['Default Page Title'];
+    }
     //Show simple page from template
     $File = 'Legba/Pages/BlankPage.html';
     $this->Event('Showing Page From Template: '.$File);
     $Template = $this->GetPageFromTemplate($File);
-    $Template = str_replace('[TITLE]',$Title,$Template);
-    $Template = str_replace('[CONTENTS]',$Contents,$Template);
+    $Template = str_replace('<!--TITLE-->',$Title,$Template);
+    $Template = str_replace('<!--CONTENTS-->',$Contents,$Template);
+    echo $Template;
+    $this->Event('end');
+    exit;
+  }
+  public function SimpleUserPage($Contents, $Title = false){
+    if($Title==false){
+      $Title = $this->Application['Default Page Title'];
+    }
+    //Show simple user page from template
+    $File = 'Legba/Pages/UserHome.html';
+    $this->Event('Showing Page From Template: '.$File);
+    $Template = $this->GetPageFromTemplate($File);
+    $Template = str_replace('<!--TITLE-->',$Title,$Template);
+    $Template = str_replace('<!--CONTENTS-->',$Contents,$Template);
     echo $Template;
     $this->Event('end');
     exit;
   }
   public function DefaultPage_UserHome(){
+    $Title = $this->Application['Default Page Title'];
     //Show user home page from template
     $File='Legba/Pages/UserHome.html';
     $this->Event('Showing Page From Template: '.$File);
     $Template = $this->GetPageFromTemplate($File);
     
+    
+    $Template = str_replace('<!--TITLE-->',$Title,$Template);
     $Template = str_replace('<!--Top Nav-->',       $this->UserTopNav(),       $Template);
-    $Template = str_replace('<!--Main Contents-->', $this->UserHomeContents(), $Template);
+    $Template = str_replace('<!--CONTENTS-->', $this->UserHomeContents(), $Template);
     
     echo $Template;
     $this->Event('end');
