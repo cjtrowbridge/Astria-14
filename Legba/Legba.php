@@ -664,7 +664,7 @@ class Legba{
       (!($this->Route(0)=='schema'))||
       
       ($this->Route(0)=='schema') &&
-      (!($this->Route(1)==false))
+      ($this->Route(1)==false)
     ){
       return '';
     }
