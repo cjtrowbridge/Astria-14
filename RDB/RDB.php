@@ -234,13 +234,23 @@ class RDB{
           <h2>Table '.$Table.'</h2>
           '.$this->getTableDescription($Table).'
         </div>
-      </div>
-    </div>
-    <h2>Top 10 Rows</h2>
     ';
     
-    $Top10Rows = $this->getTop10Rows($Table);
-    $Contents.=$this->Legba->ArrTabler($Top10Rows);
+    $Top10Rows  = $this->getTop10Rows($Table);
+    $Top10Table = $this->Legba->ArrTabler($Top10Rows);
+    
+    $Content.='
+        <div class="col-12">
+          <h2>Top 10 Rows</h2>
+          '.$Top10Table.'
+        </div>
+        
+      </div>
+    </div>
+    
+    ';
+    
+    
     
     
     
