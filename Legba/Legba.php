@@ -524,7 +524,23 @@ class Legba{
   //Default Pages
   public function DefaultPage_PublicHome(){
     //Show public home page from template
-    $this->ShowPageFromTemplate('Legba/Pages/PublicHome.html');
+    
+    $File = 'Legba/Pages/PublicHome.html';
+    $this->Event('Showing Page From Template: '.$File);
+    $Template = $this->GetPageFromTemplate($File);
+    
+    //Get the title of the application from Legba
+    $Title = $this->Application('Default Page Title','Astria 14');
+    $Template = str_replace('<!--TITLE-->',$Title,$Template);
+    //TODO this should probably be separate(?)
+    $ApplicationName = $Title;
+    $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
+    echo $Template;
+    $this->Event('end');
+    exit;
+    
+    
+    
   }
   public function DefaultPage_Signup(){
     
@@ -590,7 +606,7 @@ class Legba{
     
     //Get the title of the application from Legba
     $Title = $this->Application('Default Page Title','Astria 14');
-    
+    $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
     //TODO this should change with the current context
     $ApplicationName = $this->Application('Default Page Title','Astria 14');
     
