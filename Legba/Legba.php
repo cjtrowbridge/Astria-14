@@ -572,10 +572,13 @@ class Legba{
     if($Title==false){
       $Title = $this->Application('Default Page Title','Astria 14');
     }
+    //TODO this should change with the current context
+    $ApplicationName = $this->Application('Default Page Title','Astria 14');
     //Show simple user page from template
     $File = 'Legba/Pages/UserHome.html';
     $this->Event('Showing Page From Template: '.$File);
     $Template = $this->GetPageFromTemplate($File);
+    $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
     $Template = str_replace('<!--TITLE-->',$Title,$Template);
     $Template = str_replace('<!--CONTENTS-->',$Contents,$Template);
     echo $Template;
@@ -583,13 +586,20 @@ class Legba{
     exit;
   }
   public function DefaultPage_UserHome(){
-    $Title = $this->Application('Default Page Title','Astria 14');
     //Show user home page from template
+    
+    //Get the title of the application from Legba
+    $Title = $this->Application('Default Page Title','Astria 14');
+    
+    //TODO this should change with the current context
+    $ApplicationName = $this->Application('Default Page Title','Astria 14');
+    
+    
     $File='Legba/Pages/UserHome.html';
     $this->Event('Showing Page From Template: '.$File);
     $Template = $this->GetPageFromTemplate($File);
     
-    
+    $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
     $Template = str_replace('<!--TITLE-->',$Title,$Template);
     $Template = str_replace('<!--Top Nav-->',       $this->UserTopNav(),       $Template);
     $Template = str_replace('<!--CONTENTS-->', $this->UserHomeContents(), $Template);
