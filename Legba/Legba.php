@@ -665,7 +665,7 @@ class Legba{
       ($this->Route(0)  == 'schema') &&
       ($this->Route(1) !== false)
     )){
-      return '';
+      return '<!--Select a schema to view list of objects-->';
     }
     
     global $Schemas;
