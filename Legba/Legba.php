@@ -655,6 +655,40 @@ class Legba{
     
     return $Output;
   }
+  public function UserTopNavSchemaObjectsDropdown(){
+    $Output='';
+    
+    //This should only run if we are at the shchema/x path
+    if(
+      ($this->Legba->Route(0)=='schema') &&
+      (!($this->Legba->Route(1)==false))
+    ){
+      return '';
+    }
+    
+    global $Schemas;
+    $Database = $this->Legba->Route(1);
+    $Schema = $Schemas->get[$Database];
+    $Tables = $Schema->ListTables();
+    
+    $Output.='  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Objects
+        </a>
+        <div class="dropdown-menu" aria-labelledby="schemaDropdown">
+          ';
+    foreach($Tables as $Key => $Value){
+    $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'/'.$Value.'">'.$Key.'</a>
+';
+    }
+    $Output.='
+        </div>
+      </li>
+      <!--Schema Objects Dropdown-->
+    ';
+    
+    return $Output;
+  }
   public function UserHomeContents(){
     $Output='';
     
