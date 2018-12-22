@@ -640,8 +640,16 @@ class Legba{
         </a>
         <div class="dropdown-menu" aria-labelledby="schemaDropdown">
           ';
+    $ShownObjects = 0;
     foreach($S as $Key => $Value){
+      if($this->MayI('View Database Object '.$Database)){
     $Output.='    <a class="dropdown-item" href="/schema/'.$Value.'">'.$Key.'</a>
+';
+        $ShownObjects++;
+      }
+    }
+    if($ShownObjects==0){
+      $Output.='    <a class="dropdown-item" href="#">You do not have permission to view any databases.</a>
 ';
     }
     $Output.='
@@ -678,13 +686,21 @@ class Legba{
         </a>
         <div class="dropdown-menu" aria-labelledby="schemaDropdown">
           ';
+    $ShownObjects = 0;
     foreach($Tables as $Key => $Value){
       //TODO these Values should have configurable aliases
       if($this->MayI('View Database Object '.$Database.'/'.$Value)){
       $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'/'.$Value.'">'.$Value.'</a>
 ';
+        $ShownObjects++;
       }
     }
+    
+    if($ShownObjects==0){
+      $Output.='    <a class="dropdown-item" href="#">You do not have permission to view any objects in this database.</a>
+';
+    }
+    
     $Output.='
         </div>
       </li>
