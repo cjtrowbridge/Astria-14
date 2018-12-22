@@ -532,14 +532,15 @@ class Legba{
     //Get the title of the application from Legba
     $Title = $this->Application('Default Page Title','Astria 14');
     $Template = str_replace('<!--TITLE-->',$Title,$Template);
+    
     //TODO this should probably be separate(?)
     $ApplicationName = $Title;
     $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
+    
+    //Output the completed tempalate and exit
     echo $Template;
     $this->Event('end');
     exit;
-    
-    
     
   }
   public function DefaultPage_Signup(){
