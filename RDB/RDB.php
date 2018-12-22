@@ -242,9 +242,23 @@ class RDB{
     $Contents.='
         <div class="col-12">
           <h2>Top 10 Rows</h2>
+          <a href="javascript:void(0);" class="text-muted" onclick="$(\'#ShowMore\').slideDown(\'fast\');">Show More</a>
           '.$Top10Table.'
         </div>
         
+      </div>
+    </div>
+    
+    <div class="card" id="ShowMore">
+      <div class="card-body">
+        <h5 class="card-title">Show How Many More?</h5>
+        <div class="card-text">
+          <form action="/schema/'.$Database.'/'.$Table.'/" method="get" class="form">
+            <input type="text" name="showMore" class="form-control">
+            <input type="submit" class="form-control btn btn-success">
+            <a href="javascript:void(0);" class="btn btn-danger" onclick="$(\'#ShowMore\').slideUp(\'fast\');">
+          </form>
+        </div>
       </div>
     </div>
     
