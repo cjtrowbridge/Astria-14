@@ -646,6 +646,7 @@ class Legba{
     $Output.='
         </div>
       </li>
+      <!--Schema Objects Dropdown-->
     ';
     
     return $Output;
