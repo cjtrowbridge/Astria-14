@@ -15,7 +15,7 @@ class Legba{
   private $Events   = false;
   private $User     = false;
   private $Route    = false;
-  private $Applciation = array();
+  private $Application = array();
   
   //Native class primitives
   function __construct(){
@@ -139,8 +139,12 @@ class Legba{
       $this->Application[$Key]=$Value;
     }
   }
-  public function Application(){
-    return $this->Application;
+  public function Application($Key, $Default = false){
+    if(isset($this->Application[$Key])){
+      return $this->Application[$Key];
+    }else{
+      return $Default;
+    }
   }
   //TODO make the default table arguments come from a config setting.
   public function Route($Index = false){
@@ -552,7 +556,7 @@ class Legba{
   }
   public function SimplePage($Contents, $Title = false){
     if($Title==false){
-      $Title = $this->Application['Default Page Title'];
+      $Title = $this->Application('Default Page Title','Astria 14');
     }
     //Show simple page from template
     $File = 'Legba/Pages/BlankPage.html';
@@ -566,7 +570,7 @@ class Legba{
   }
   public function SimpleUserPage($Contents, $Title = false){
     if($Title==false){
-      $Title = $this->Application['Default Page Title'];
+      $Title = $this->Application('Default Page Title','Astria 14');
     }
     //Show simple user page from template
     $File = 'Legba/Pages/UserHome.html';
@@ -579,7 +583,7 @@ class Legba{
     exit;
   }
   public function DefaultPage_UserHome(){
-    $Title = $this->Application['Default Page Title'];
+    $Title = $this->Application('Default Page Title','Astria 14');
     //Show user home page from template
     $File='Legba/Pages/UserHome.html';
     $this->Event('Showing Page From Template: '.$File);
