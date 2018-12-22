@@ -598,6 +598,7 @@ class Legba{
     $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
     $Template = str_replace('<!--TITLE-->',$Title,$Template);
     $Template = str_replace('<!--CONTENTS-->',$Contents,$Template);
+    $Template = str_replace('<!--Top Nav-->',  $this->UserTopNav(),       $Template);
     echo $Template;
     $this->Event('end');
     exit;
@@ -617,8 +618,8 @@ class Legba{
     $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
     
     $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
-    $Template = str_replace('<!--TITLE-->',$Title,$Template);
-    $Template = str_replace('<!--Top Nav-->',       $this->UserTopNav(),       $Template);
+    $Template = str_replace('<!--TITLE-->',    $Title,$Template);
+    $Template = str_replace('<!--Top Nav-->',  $this->UserTopNav(),       $Template);
     $Template = str_replace('<!--CONTENTS-->', $this->UserHomeContents(), $Template);
     
     echo $Template;
@@ -626,6 +627,7 @@ class Legba{
     exit;
     
   }
+  
   public function UserTopNav(){
     $Output='';
     
