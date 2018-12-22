@@ -239,7 +239,7 @@ class RDB{
     $Top10Rows  = $this->getTop10Rows($Table);
     $Top10Table = $this->Legba->ArrTabler($Top10Rows);
     
-    $Content.='
+    $Contents.='
         <div class="col-12">
           <h2>Top 10 Rows</h2>
           '.$Top10Table.'
