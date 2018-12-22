@@ -473,6 +473,7 @@ class Legba{
     $RAM  = round(memory_get_usage()/1000000-$First['RAM'],4);
     $Runtime = round(microtime(true)-$First['Time'],4);
     echo '<hr><h4>Route: '.$_GET['route'].'</h4>';
+    $this->pd($this->Route);
     echo '<h4>Runtime: '.$Runtime.' sec</h4>';
     echo '<h4>Memory: '.$RAM.' mb</h4>';
     echo '<h4>Session Verbosity: ';
