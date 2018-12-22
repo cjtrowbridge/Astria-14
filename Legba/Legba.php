@@ -151,7 +151,11 @@ class Legba{
     if($Index == false){
       return $this->Route;
     }else{
-      return $this->Route[$Index];
+      if(isset($this->Route[$Index])){
+        return $this->Route[$Index];
+      }else{
+        return false;
+      }
     }
   }
   public function ArrTabler($arr, $table_class = 'table tablesorter tablesorter-ice tablesorter-bootstrap', $table_id = null,$Sort = true,$OutputCallback = false){
