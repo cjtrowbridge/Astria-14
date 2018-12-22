@@ -641,9 +641,10 @@ class Legba{
         <div class="dropdown-menu" aria-labelledby="schemaDropdown">
           ';
     $ShownObjects = 0;
-    foreach($S as $Key => $Value){
+    foreach($S as $Key => $Database){
       if($this->MayI('View Database Object '.$Database)){
-    $Output.='    <a class="dropdown-item" href="/schema/'.$Value.'">'.$Key.'</a>
+        //TODO these database names should be displayed as a configurable alias
+    $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'">'.$Key.'</a>
 ';
         $ShownObjects++;
       }
