@@ -607,10 +607,10 @@ class Legba{
     
     //Get the title of the application from Legba
     $Title = $this->Application('Default Page Title','Astria 14');
-    $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
+    
     //TODO this should change with the current context
     $ApplicationName = $this->Application('Default Page Title','Astria 14');
-    
+    $Template = str_replace('<!--Application Name-->',$ApplicationName,$Template);
     
     $File='Legba/Pages/UserHome.html';
     $this->Event('Showing Page From Template: '.$File);
