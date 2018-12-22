@@ -168,17 +168,18 @@ class RDB{
   
   //Describe this schema
   public function DescribeSchema(){
+    $Database = $this->Credentials['Database'];
     $Contents=' <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1>Database '.$this->Credentials['Database'].'</h1>
+          <h1>Database '.$Database.'</h1>
           <h2>Tables:</h2>
           <ul>
             ';
       $Tables = $this->ListTables();
       foreach($Tables as $Key => $Value){
         $Contents.='
-              <li><a href="/schema/'.$this->Credentials['Database'].'/'.$Value.'/">'.$Value.'</a></li>
+              <li><a href="/schema/'.$Database.'/'.$Value.'/">'.$Value.'</a></li>
         ';
       }
       $Contents.=' 
@@ -187,7 +188,7 @@ class RDB{
       </div>
     </div>
     ';
-    $this->Legba->SimplePage($Contents);
+    $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/');
   }
   
   //Describe a table within this schema
@@ -199,17 +200,19 @@ class RDB{
     if(!(in_array($Table,$this->ListTables()))){
       die('Describe Invalid Table: '.$Table);
     }
+    $Database = $this->Credentials['Database'];
+    
     $Contents=' <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1><a href="/schema/'.$this->Credentials['Database'].'/">Database '.$this->Credentials['Database'].'</a></h1>
+          <h1><a href="/schema/'.$Database.'/">Database '.$Database.'</a></h1>
           <h2>Table '.$Table.'</h2>
           '.$this->getTableDescription($Table).'
         </div>
       </div>
     </div>
     ';
-    $this->Legba->SimplePage($Contents);
+    $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
 
 }
