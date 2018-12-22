@@ -669,7 +669,7 @@ class Legba{
     
     global $Schemas;
     $Database = $this->Route(1);
-    $Schema = $Schemas->get[$Database];
+    $Schema = $Schemas->getSchema($Database);
     $Tables = $Schema->ListTables();
     
     $Output.='  <li class="nav-item dropdown">
