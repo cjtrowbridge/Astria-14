@@ -661,14 +661,14 @@ class Legba{
     
     //This should only run if we are at the shchema/x path
     if(
-      ($this->Legba->Route(0)=='schema') &&
-      (!($this->Legba->Route(1)==false))
+      ($this->Route(0)=='schema') &&
+      (!($this->Route(1)==false))
     ){
       return '';
     }
     
     global $Schemas;
-    $Database = $this->Legba->Route(1);
+    $Database = $this->Route(1);
     $Schema = $Schemas->get[$Database];
     $Tables = $Schema->ListTables();
     
