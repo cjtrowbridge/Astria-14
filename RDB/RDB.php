@@ -106,6 +106,8 @@ class RDB{
   
   //Return a list of all tables in this database
   public function ListTables(){
+    //TODO add caching so this is not actually running the query more than once per execution
+    
     switch($this->Type){
       case 'mysql':
         $Results = $this->Query('show tables');
@@ -133,6 +135,28 @@ class RDB{
         $Results = $this->Query('DESCRIBE '.$Table);
         $Description = $this->Legba->ArrTabler($Results);
         return $Description;
+      default:
+        die('Invalid Database Type: '.$this->Type);
+    }
+  }
+  public function getTop10Rows($Table){
+    if(!(in_array($Table,$this->ListTables()))){
+      die('Describe Invalid Table: '.$Table);
+    }
+    switch($this->Type){
+      case 'mysql':
+        $SQL = "SELECT * FROM '".$Table."' ORDER BY 1 DESC LIMIT 10";
+        $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
+        if(is_bool($Result)){
+          return $Result;
+        }
+        $Output=array();
+        while($Row=mysqli_fetch_assoc($Result)){
+          $Output[]=$Row;
+        }
+        return $Output;
+        break;
+        
       default:
         die('Invalid Database Type: '.$this->Type);
     }
@@ -211,7 +235,14 @@ class RDB{
         </div>
       </div>
     </div>
+    <h2>Top 10 Rows</h2>
     ';
+    
+    $Top10Rows = $this->getTop10Rows($Table);
+    $Contents.=$this->Legba->ArrTabler($Top10Rows);
+    
+    
+    
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
 
