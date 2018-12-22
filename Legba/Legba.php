@@ -650,8 +650,9 @@ class Legba{
     $Output.='
         </div>
       </li>
-      <!--Schema Objects Dropdown-->
+      
     ';
+    $Output.=UserTopNavSchemaObjectsDropdown();
     
     return $Output;
   }
