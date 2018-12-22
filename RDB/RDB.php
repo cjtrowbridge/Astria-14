@@ -26,7 +26,7 @@ class Schemas{
     }
     return $Output;
   }
-  public function get($Name){
+  public function getSchema($Name){
     if(isset($this->Schemas[$Name])){
       return $this->Schemas[$Name];
     }else{
