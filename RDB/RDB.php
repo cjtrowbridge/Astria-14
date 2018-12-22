@@ -145,7 +145,7 @@ class RDB{
     }
     switch($this->Type){
       case 'mysql':
-        $SQL = "SELECT * FROM '".$Table."' ORDER BY 1 DESC LIMIT 10";
+        $SQL = "SELECT * FROM `".$Table."` ORDER BY 1 DESC LIMIT 10";
         $this->Legba->Event($SQL);
         $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
         if(is_bool($Result)){
