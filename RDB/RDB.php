@@ -276,7 +276,9 @@ class RDB{
   public function TableCellOutputHandler($Key, $Value, $Row){
     $Output = '';
     
+    $Output.= '<span title="'.var_export($Row,true).'">';
     $Output.= $Value;
+    $Output.= '</span>';
     
     return $Output;
   }
