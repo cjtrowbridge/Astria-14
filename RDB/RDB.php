@@ -139,13 +139,17 @@ class RDB{
         die('Invalid Database Type: '.$this->Type);
     }
   }
-  public function getTop10Rows($Table){
+  public function getTopRows($Table, $Count = 10){
     if(!(in_array($Table,$this->ListTables()))){
       die('Describe Invalid Table: '.$Table);
     }
+    
+    $Count = intval($Count);
+    if($Count==0){$Count = 10;}
+    
     switch($this->Type){
       case 'mysql':
-        $SQL = "SELECT * FROM `".$Table."` ORDER BY 1 DESC LIMIT 10";
+        $SQL = "SELECT * FROM `".$Table."` ORDER BY 1 DESC LIMIT ".$Count;
         $this->Legba->Event($SQL);
         $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
         if(is_bool($Result)){
@@ -236,19 +240,25 @@ class RDB{
         </div>
     ';
     
+    if(isset($_GET['show'])){
+      $Count = $_GET['show'];
+    }else{
+      $Count = 10;
+    }
+    
     
     //Default output is the top ten rows of the table.
-    $Data  = $this->getTop10Rows($Table);
+    $Data  = $this->getTopRows($Table, $Count);
     
     //Rewrite all the cell contents to include links for keys, etc.
     $Table = $this->Legba->ArrTabler($Data, 'table tablesorter tablesorter-ice tablesorter-bootstrap', 'OutputTable', true, array($this, 'TableCellOutputHandler',$Table) );
     
     $Contents.='
         <div class="col-12">
-          <h2>Top 10 Rows</h2>
+          <h2>Top '.$Count.' Rows</h2>
           <div>
             <a href="javascript:void(0);" class="text-muted" onclick="$(\'#Search\').slideDown(\'fast\');">Search</a> - 
-            <a href="javascript:void(0);" class="text-muted" onclick="$(\'#ShowMore\').slideDown(\'fast\');">Show More</a>
+            <a href="./?show=100" class="text-muted">Show More</a>
           </div
           '.$Table.'
         </div>
