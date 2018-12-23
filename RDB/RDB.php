@@ -370,8 +370,8 @@ class RDB{
     }
     if(isset($Column['FOREIGN KEY'])){
       //TODO This should probably not be indexed.
-      $ForeignTable   = $Column['FOREIGN_KEY'][0]['REFERENCED_TABLE_NAME'];
-      $ForeignColumn  = $Column['FOREIGN_KEY'][0]['REFERENCED_COLUMN_NAME'];
+      $ForeignTable   = $Column['FOREIGN KEY'][0]['REFERENCED_TABLE_NAME'];
+      $ForeignColumn  = $Column['FOREIGN KEY'][0]['REFERENCED_COLUMN_NAME'];
       $ModifiedOutput = '<a href="/'.$Database.'/'.$ForeignTable.'/?'.$ForeignColumn.'='.$Value.'">'.$Value.'</a>';
     }
     
