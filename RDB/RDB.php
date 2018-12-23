@@ -241,7 +241,7 @@ class RDB{
     $Data  = $this->getTop10Rows($Table);
     
     //Rewrite all the cell contents to include links for keys, etc.
-    $Table = $this->Legba->ArrTabler($Data, 'table tablesorter tablesorter-ice tablesorter-bootstrap', 'OutputTable', true, array($this, 'TableCellOutputHandler') );
+    $Table = $this->Legba->ArrTabler($Data, 'table tablesorter tablesorter-ice tablesorter-bootstrap', 'OutputTable', true, array($this, 'TableCellOutputHandler',$Table) );
     
     $Contents.='
         <div class="col-12">
@@ -273,7 +273,14 @@ class RDB{
     
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
-  public function TableCellOutputHandler($Key, $Value, $Column, $Row){
+  public function DescribeTableColumn($Table,$Column){
+    //TODO
+    return 'tada';
+  }
+  
+  public function TableCellOutputHandler($Key, $Value, $Row, $Table){
+    $Column = $this->DescribeTableColumn();
+    
     $Output = '';
     
     $Output.= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
