@@ -236,14 +236,21 @@ class RDB{
         </div>
     ';
     
-    $Top10Rows  = $this->getTop10Rows($Table);
-    $Top10Table = $this->Legba->ArrTabler($Top10Rows);
+    
+    //Default output is the top ten rows of the table.
+    $Data  = $this->getTop10Rows($Table);
+    
+    //Rewrite all the cell contents to include links for keys, etc.
+    $Table = $this->Legba->ArrTabler($Data, 'table tablesorter tablesorter-ice tablesorter-bootstrap', 'OutputTable', true, array($this, 'TableCellOutputHandler') );
     
     $Contents.='
         <div class="col-12">
           <h2>Top 10 Rows</h2>
-          <a href="javascript:void(0);" class="text-muted" onclick="$(\'#ShowMore\').slideDown(\'fast\');">Show More</a>
-          '.$Top10Table.'
+          <div>
+            <a href="javascript:void(0);" class="text-muted" onclick="$(\'#Search\').slideDown(\'fast\');">Search</a> - 
+            <a href="javascript:void(0);" class="text-muted" onclick="$(\'#ShowMore\').slideDown(\'fast\');">Show More</a>
+          </div
+          '.$Table.'
         </div>
         
       </div>
@@ -264,11 +271,15 @@ class RDB{
     
     ';
     
-    
-    
-    
-    
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
-
+  public function TableCellOutputHandler($Key, $Value, $Row){
+    $Output = '';
+    
+    $Output.= "Key: ".$Key.'<br>';
+    $Output.= "Value: ".$Value.'<br>';
+    $Output.= "Row: ".$Row.'<br>';
+    
+    return $Output;
+  }
 }
