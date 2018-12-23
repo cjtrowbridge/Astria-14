@@ -274,9 +274,59 @@ class RDB{
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
   public function DescribeTableColumn($Table, $Column){
-    //TODO this should cache the data so it is not running the query more than once per execution
+    //Cache this data so it is not running the query more than once per execution
+    global $DescribeTableColumn;
+    if(!(is_array($DescribeTableColumn))){
+      $DescribeTableColumn = array();
+    }
+    if(!(isset($DescribeTableColumn[$Table]))){
+      $Data = getTableColumnDescriptions($Table);
+      $DescribeTableColumn[$Table] = array();
+      foreach($Data as $Row){
+        //If this column is not yet listed in the cached table array, create it.
+        if(!(isset($DescribeTableColumn[$Table][$Row['COLUMN_NAME']]))){
+          $DescribeTableColumn[$Table][$Row['COLUMN_NAME']]=array();
+        }
+        
+        //If this constraint type for this column is not yet listed in the cached table array, create it.
+        if(!(isset($DescribeTableColumn[$Table][$Row['COLUMN_NAME']]))){
+          $DescribeTableColumn[$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']]=array();
+        }
+        $DescribeTableColumn[$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']][]=$Row;
+      }
+    }
+    return $DescribeTableColumn[$Table][$Column];
+  }
+  
+  public function ValidateTable($Table){
+    if(!(in_array($Table,$this->ListTables()))){
+      die('Invalid Table: '.$Table);
+    }
+  }
+  public function ValidateTableColumn($Table,$Column){
+    //TODO
+    die('TODO: ValidateTableColumn');
+  }
+  
+  public function getTableColumnDescriptions($Table){
     
-    return 'tada';
+    $Database = $this->Credentials['Database'];
+    ValidateTable($Table);
+    
+    $SQL="
+      SELECT COLUMN_NAME, CONSTRAINT_TYPE, REFERENCED_COLUMN_NAME, REFERENCED_TABLE_NAME
+      FROM information_schema.KEY_COLUMN_USAGE 
+      LEFT JOIN information_schema.TABLE_CONSTRAINTS ON
+        information_schema.TABLE_CONSTRAINTS.TABLE_SCHEMA    = information_schema.KEY_COLUMN_USAGE.TABLE_SCHEMA AND
+        information_schema.TABLE_CONSTRAINTS.TABLE_NAME      = information_schema.KEY_COLUMN_USAGE.TABLE_NAME AND
+        information_schema.TABLE_CONSTRAINTS.CONSTRAINT_NAME = information_schema.KEY_COLUMN_USAGE.CONSTRAINT_NAME
+      WHERE 
+        information_schema.TABLE_CONSTRAINTS.TABLE_SCHEMA = '".$Database."' AND
+        information_schema.TABLE_CONSTRAINTS.TABLE_NAME   = '".$Table."'
+    ";
+    
+    $Data = $this->Query($SQL);
+    return $Data;
   }
   
   public function TableCellOutputHandler($Key, $Value, $Row, $Table){
