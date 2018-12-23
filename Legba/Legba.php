@@ -767,7 +767,7 @@ class Legba{
   function CurrentRam($Precision = 3){
     $Ret = memory_get_usage() / 1000000;
     $Val = round($Ret,$Precision);
-    $Ret = $Ret.' megabytes.';
+    $Ret = $Val.' megabytes.';
     
     //TODO make these threshholds configurable
     if($Val > 3){
