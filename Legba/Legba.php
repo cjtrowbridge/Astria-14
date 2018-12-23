@@ -745,7 +745,7 @@ class Legba{
   public function UserFooterContents(){
     $Output='';
     
-    $Output.= $this->CurrentRuntime().'- '.$this->CurrentRam();
+    $Output.= $this->CurrentRuntime().' '.$this->CurrentRam();
     
     return $Output;
   }
