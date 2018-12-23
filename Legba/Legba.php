@@ -180,9 +180,24 @@ class Legba{
           if($OutputCallback == false){
             $return.="<td>".$value."</td>";  
           }else{
-            //TODO i dont think this will work like this but i dont need it to work at this point
             $return.= "<td>";
-            $return.= call_user_func(array($OutputCallback, $Key, $Value, $Row);
+            
+            if(is_array($OutputCallback)){
+              //Include anything passed in such as a resource for the database handler.
+              $Array = array();
+              foreach($OutputHandler as $Key => $Value){
+                $Array[$Key]=$Value;
+              }
+              //Include the information about this cell and its row and column.
+              $Array[]=$Key;
+              $Array[]=$Value;
+              $Array[]=$Row;
+              //Call the callback with all these things included.
+              $return.= call_user_func($Array);
+            }else{
+              $return.= "Unknown Handler Passed.";
+            }
+            
             $return.= "</td>";
           }
         }
