@@ -366,13 +366,13 @@ class RDB{
     $Output= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
     if(isset($Column['PRIMARY KEY'])){
       //TODO add support for multi-column primary keys.
-      $ModifiedOutput = '<a href="/'.$Database.'/'.$Table.'/?'.$Column.'='.$Value.'">'.$Value.'</a>';
+      $ModifiedOutput = '<a href="/schema/'.$Database.'/'.$Table.'/?'.$Column.'='.$Value.'">'.$Value.'</a>';
     }
     if(isset($Column['FOREIGN KEY'])){
       //TODO This should probably not be indexed.
       $ForeignTable   = $Column['FOREIGN KEY'][0]['REFERENCED_TABLE_NAME'];
       $ForeignColumn  = $Column['FOREIGN KEY'][0]['REFERENCED_COLUMN_NAME'];
-      $ModifiedOutput = '<a href="/'.$Database.'/'.$ForeignTable.'/?'.$ForeignColumn.'='.$Value.'">'.$Value.'</a>';
+      $ModifiedOutput = '<a href="/schema/'.$Database.'/'.$ForeignTable.'/?'.$ForeignColumn.'='.$Value.'">'.$Value.'</a>';
     }
     
     
