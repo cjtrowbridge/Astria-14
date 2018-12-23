@@ -273,10 +273,10 @@ class RDB{
     
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
-  public function TableCellOutputHandler($Key, $Value, $Row){
+  public function TableCellOutputHandler($Key, $Value, $Column, $Row){
     $Output = '';
     
-    $Output.= '<span title="'.var_export($Row,true).'">';
+    $Output.= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
     $Output.= $Value;
     $Output.= '</span>';
     
