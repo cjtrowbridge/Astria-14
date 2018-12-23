@@ -185,15 +185,15 @@ class Legba{
             if(is_array($OutputCallback)){
               //Include anything passed in such as a resource for the database handler.
               $Array = array();
-              foreach($OutputCallback as $K => $V){
-                $Array[$K]=$V;
+              for($i = 1; $i <= count($OutputCallback; $i++){
+                echo $i;
               }
               //Include the information about this cell and its row and column.
               $Array[]=$key;
               $Array[]=$value;
               $Array[]=$row;
               //Call the callback with all these things included.
-              $return.= call_user_func($Array);
+              $return.= call_user_func_array($OutputCallback[0], $Array);
             }else{
               $return.= "Unknown Handler Passed.";
             }
