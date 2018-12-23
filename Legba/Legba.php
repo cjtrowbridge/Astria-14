@@ -506,10 +506,16 @@ class Legba{
     echo '</h4>';
     echo '<hr><h4>Debug Summary</h4>';
     echo $this->ArrTabler($this->Debug);
-    echo '<hr><h4>Events</h4>';
-    echo $this->pd($this->Events);
-    echo '<hr><h4>Session</h4>';
-    $this->pd($_SESSION);
+    if($this->MayI('Show Extended Debug Summary')){
+      echo '<hr><h4>Events</h4>';
+      $this->pd($this->Events);
+      echo '<hr><h4>Session</h4>';
+      $this->pd($_SESSION);
+      echo '<hr>';
+      echo '<h4>Schema</h4>';
+      global $DescribeTableColumn;
+      $this->pd($DescribeTableColumn);
+    }
   }
   public function ShowRuntimeErrors(){
     error_reporting(E_ALL);
