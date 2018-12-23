@@ -111,6 +111,8 @@ class RDB{
     global $DescribeTableColumn;
     if(isset($DescribeTableColumn[$Database])){
       
+      $this->Legba->pd($DescribeTableColumn[$Database]);
+      
       $Output = array();
       foreach($DescribeTableColumn[$Database] as $Key => $Value){
         $Output[]=$Value;
