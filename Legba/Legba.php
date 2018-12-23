@@ -185,13 +185,13 @@ class Legba{
             if(is_array($OutputCallback)){
               //Include anything passed in such as a resource for the database handler.
               $Array = array();
-              foreach($OutputCallback as $Key => $Value){
-                $Array[$Key]=$Value;
+              foreach($OutputCallback as $K => $V){
+                $Array[$K]=$V;
               }
               //Include the information about this cell and its row and column.
-              $Array[]=$Key;
-              $Array[]=$Value;
-              $Array[]=$Row;
+              $Array[]=$key;
+              $Array[]=$value;
+              $Array[]=$row;
               //Call the callback with all these things included.
               $return.= call_user_func($Array);
             }else{
