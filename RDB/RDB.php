@@ -52,7 +52,7 @@ class RDB{
     
     if(!(file_exists($ConfigPath))){
       //TODO maybe this should not be a fatal error?
-      die('Invalid Database Configuration File.');
+      die('Invalid Database Configuration File: '.$ConfigPath);
     }
     
     $this->Credentials = array(
