@@ -360,7 +360,7 @@ class RDB{
   public function TableCellOutputHandler($Key, $Value, $Row, $Table){
     $Database = $this->Credentials['Database'];
     $this->ValidateTable($Table);
-    $this->ValidateTableColummn($Key);
+    $this->ValidateTableColumn($Key);
     $Column = $this->DescribeTableColumn($Table, $Key);
     $ModifiedOutput = '';
     $Output= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
