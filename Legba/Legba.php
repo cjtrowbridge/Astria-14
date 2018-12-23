@@ -744,7 +744,7 @@ class Legba{
   public function UserFooterContents(){
     $Output='';
     
-    
+    $Output.= $this->CurrentRuntime().'- '.$this->CurrentRam();
     
     return $Output;
   }
@@ -753,7 +753,7 @@ class Legba{
     return microtime(true)-$BEGIN;
   }
   function CurrentRam(){
-    return (memory_get_usage() / 1024 / 1024);
+    return (memory_get_usage() / 1000000);
   }
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
