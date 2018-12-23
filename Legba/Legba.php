@@ -745,7 +745,7 @@ class Legba{
   public function UserFooterContents(){
     $Output='';
     
-    $Output.= $this->CurrentRam().'<br>'.$this->CurrentRuntime();
+    $Output.= $this->CurrentRam().'<br>'.$this->CurrentRuntime().'<br>'.$this->QueriesRun();
     
     return $Output;
   }
@@ -769,14 +769,11 @@ class Legba{
     $Val = round($Ret,$Precision);
     $Ret = $Val.' megabytes.';
     
-    //TODO make these threshholds configurable
-    if($Val > 3){
-      $Ret = '<span class="text-danger">'.$Ret.'</span>';
-    }else{
-      $Ret = '<span class="text-success">'.$Ret.'</span>';
-    }
-    
     return $Ret;
+  }
+  public function QueriesRun(){
+    global $QUERIES_RUN;
+    return $QUERIES_RUN;
   }
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
