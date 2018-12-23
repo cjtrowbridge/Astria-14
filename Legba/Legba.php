@@ -193,6 +193,8 @@ class Legba{
               $Array[]=$value;
               $Array[]=$row;
               //Call the callback with all these things included.
+              $this->pd($OutputCallback[0]);
+              $this->pd($OutputCallback);
               $return.= call_user_func_array($OutputCallback[0], $Array);
             }else{
               $return.= "Unknown Handler Passed.";
