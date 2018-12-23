@@ -368,7 +368,7 @@ class RDB{
       //TODO add support for multi-column primary keys.
       $ModifiedOutput='<a href=""></a>';
     }
-    isset($Column['FOREIGN_KEY']){
+    if(isset($Column['FOREIGN_KEY'])){
       //TODO This should probably not be indexed.
       $ForeignTable  = $Column['FOREIGN_KEY'][0]['REFERENCED_TABLE_NAME'];
       $ForeignColumn = $Column['FOREIGN_KEY'][0]['REFERENCED_COLUMN_NAME'];
