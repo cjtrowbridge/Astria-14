@@ -749,12 +749,16 @@ class Legba{
     
     return $Output;
   }
-  function CurrentRuntime(){
+  function CurrentRuntime($Precision = 3){
     global $BEGIN;
-    return microtime(true)-$BEGIN;
+    $Ret = microtime(true)-$BEGIN;
+    $Ret = round($Ret,$Precision);
+    return $Ret;
   }
-  function CurrentRam(){
-    return (memory_get_usage() / 1000000);
+  function CurrentRam($Precision = 3){
+    $Ret = memory_get_usage() / 1000000;
+    $Ret = round($Ret,$Precision);
+    return $Ret;
   }
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
