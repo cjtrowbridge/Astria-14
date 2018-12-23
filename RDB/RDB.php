@@ -198,7 +198,7 @@ class RDB{
       <div class="row">
         <div class="col-12">
           <h1>Database '.$Database.'</h1>
-          <h2>Tables:</h2>
+          <h2 title="AKA Tables">Objects:</h2>
           <ul>
             ';
       $Tables = $this->ListTables();
