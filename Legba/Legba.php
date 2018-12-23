@@ -181,9 +181,10 @@ class Legba{
             $return.="<td>".$value."</td>";  
           }else{
             //TODO i dont think this will work like this but i dont need it to work at this point
-            $return.="<td>".$OutputCallback($key, $value,$row)."</td>";
+            $return.= "<td>";
+            $return.= call_user_func(array($OutputCallback, $Key, $Value, $Row);
+            $return.= "</td>";
           }
-
         }
         $return.= "			</tr>\n";
       }
