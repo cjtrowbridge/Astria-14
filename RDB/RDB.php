@@ -280,7 +280,7 @@ class RDB{
       $DescribeTableColumn = array();
     }
     if(!(isset($DescribeTableColumn[$Table]))){
-      $Data = getTableColumnDescriptions($Table);
+      $Data = $this->getTableColumnDescriptions($Table);
       $DescribeTableColumn[$Table] = array();
       foreach($Data as $Row){
         //If this column is not yet listed in the cached table array, create it.
