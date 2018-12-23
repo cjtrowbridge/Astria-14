@@ -283,10 +283,9 @@ class RDB{
       $DescribeTableColumn[$Table] = array();
       
       $Data = $this->getTableColumnDescriptions($Table);
-      foreach($Data as $Column){
-        $DescribeTableColumn[$Table][$Column['COLUMN_NAME']]=$Column;
+      foreach($Data as $C){
+        $DescribeTableColumn[$Table][$C['COLUMN_NAME']]=$C;
       }
-      
       
       $Data = $this->getTableColumnKeyDescriptions($Table);
       
@@ -303,7 +302,12 @@ class RDB{
         $DescribeTableColumn[$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']][]=$Row;
       }
     }
-    return $DescribeTableColumn[$Table][$Column];
+    
+    if(!(isset($DescribeTableColumn[$Table][$Column]))){
+      return false;
+    }else{
+      return $DescribeTableColumn[$Table][$Column];
+    }
   }
   
   public function ValidateTable($Table){
@@ -312,8 +316,9 @@ class RDB{
     }
   }
   public function ValidateTableColumn($Table,$Column){
-    //TODO
-    die('TODO: ValidateTableColumn');
+    if($this->DescribeTableColumn($Table,$Column)===false){
+      die('Invalid Column: '.$Table.'/'.$Column);
+    }
   }
   
   public function getTableColumnDescriptions($Table){
