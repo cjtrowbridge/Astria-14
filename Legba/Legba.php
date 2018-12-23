@@ -647,6 +647,7 @@ class Legba{
     $Template = str_replace('<!--TITLE-->',    $Title,$Template);
     $Template = str_replace('<!--Top Nav-->',  $this->UserTopNav(),       $Template);
     $Template = str_replace('<!--CONTENTS-->', $this->UserHomeContents(), $Template);
+    $Template = str_replace('<!--FOOTER-->',   $this->UserFooterContents(), $Template);
     
     echo $Template;
     $this->Event('end');
@@ -739,6 +740,20 @@ class Legba{
     
     
     return $Output;
+  }
+  public function UserFooterContents(){
+    $Output='';
+    
+    
+    
+    return $Output;
+  }
+  function CurrentRuntime(){
+    global $BEGIN;
+    return microtime(true)-$BEGIN;
+  }
+  function CurrentRam(){
+    return (memory_get_usage() / 1024 / 1024);
   }
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
