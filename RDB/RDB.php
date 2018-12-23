@@ -273,13 +273,14 @@ class RDB{
     
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
-  public function DescribeTableColumn($Table,$Column){
-    //TODO
+  public function DescribeTableColumn($Table, $Column){
+    //TODO this should cache the data so it is not running the query more than once per execution
+    
     return 'tada';
   }
   
   public function TableCellOutputHandler($Key, $Value, $Row, $Table){
-    $Column = $this->DescribeTableColumn();
+    $Column = $this->DescribeTableColumn($Table, $Column);
     
     $Output = '';
     
