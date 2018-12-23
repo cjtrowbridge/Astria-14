@@ -773,7 +773,7 @@ class Legba{
   }
   public function QueriesRun(){
     global $QUERIES_RUN;
-    return $QUERIES_RUN;
+    return $QUERIES_RUN.' queries.';
   }
   public function GetPageFromTemplate($File){
     return file_get_contents($File);
