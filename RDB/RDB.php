@@ -280,7 +280,7 @@ class RDB{
   }
   
   public function TableCellOutputHandler($Key, $Value, $Row, $Table){
-    $Column = $this->DescribeTableColumn($Table, $Column);
+    $Column = $this->DescribeTableColumn($Table, $Key);
     
     $Output = '';
     
