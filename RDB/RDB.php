@@ -364,11 +364,11 @@ class RDB{
     $Column = $this->DescribeTableColumn($Table, $Key);
     $ModifiedOutput = '';
     $Output= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
-    if(isset($Column['PRIMARY_KEY'])){
+    if(isset($Column['PRIMARY KEY'])){
       //TODO add support for multi-column primary keys.
       $ModifiedOutput = '<a href="/'.$Database.'/'.$Table.'/?'.$Column.'='.$Value.'">'.$Value.'</a>';
     }
-    if(isset($Column['FOREIGN_KEY'])){
+    if(isset($Column['FOREIGN KEY'])){
       //TODO This should probably not be indexed.
       $ForeignTable   = $Column['FOREIGN_KEY'][0]['REFERENCED_TABLE_NAME'];
       $ForeignColumn  = $Column['FOREIGN_KEY'][0]['REFERENCED_COLUMN_NAME'];
