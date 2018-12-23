@@ -106,20 +106,31 @@ class RDB{
   
   //Return a list of all tables in this database
   public function ListTables(){
-    //TODO add caching so this is not actually running the query more than once per execution
+    $Database = $this->Credentials['Database'];
     
-    switch($this->Type){
-      case 'mysql':
-        $Results = $this->Query('show tables');
-        $Tables = array();
-        foreach($Results as $Row => $Array){
-          foreach($Array as $Key => $Value){
-            $Tables[]=$Value;
+    global $DescribeTableColumn;
+    if(isset($DescribeTableColumn[$Database])){
+      
+      $Output = array();
+      foreach($DescribeTableColumn[$Database] as $Key => $Value){
+        $Output[]=$Value;
+      }
+      return $Output;
+    }else{
+      switch($this->Type){
+        case 'mysql':
+          $Results = $this->Query('show tables');
+          $Tables = array();
+          foreach($Results as $Row => $Array){
+            foreach($Array as $Key => $Value){
+              $Tables[]=$Value;
+              $DescribeTableColumn[$Database][$Value]=array();
+            }
           }
-        }
-        return $Tables;
-      default:
-        die('Invalid Database Type: '.$this->Type);
+          return $Tables;
+        default:
+          die('Invalid Database Type: '.$this->Type);
+      }
     }
   }
   
@@ -292,39 +303,43 @@ class RDB{
     $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/'.$Table.'/');
   }
   public function DescribeTableColumn($Table, $Column){
+    $Database = $this->Credentials['Database'];
     //Cache this data so it is not running the query more than once per execution
     global $DescribeTableColumn;
     if(!(is_array($DescribeTableColumn))){
-      $DescribeTableColumn = array();
+      //Create an array for this database and populate it with a list of tables. 
+      //TODO This design may not be ideal for databases with large numbers of tables
+      $this->ListTables();
     }
-    if(!(isset($DescribeTableColumn[$Table]))){
-      $DescribeTableColumn[$Table] = array();
+    
+    if(!(isset($DescribeTableColumn[$Database][$Table]))){
+      $DescribeTableColumn[$Database][$Table] = array();
       
       $Data = $this->getTableColumnDescriptions($Table);
       foreach($Data as $C){
-        $DescribeTableColumn[$Table][$C['COLUMN_NAME']]=$C;
+        $DescribeTableColumn[$Database][$Table][$C['COLUMN_NAME']]=$C;
       }
       
       $Data = $this->getTableColumnKeyDescriptions($Table);
       
       foreach($Data as $Row){
         //If this column is not yet listed in the cached table array, create it.
-        if(!(isset($DescribeTableColumn[$Table][$Row['COLUMN_NAME']]))){
-          $DescribeTableColumn[$Table][$Row['COLUMN_NAME']]=array();
+        if(!(isset($DescribeTableColumn[$Database][$Table][$Row['COLUMN_NAME']]))){
+          $DescribeTableColumn[$Database][$Table][$Row['COLUMN_NAME']]=array();
         }
         
         //If this constraint type for this column is not yet listed in the cached table array, create it.
-        if(!(isset($DescribeTableColumn[$Table][$Row['COLUMN_NAME']]))){
-          $DescribeTableColumn[$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']]=array();
+        if(!(isset($DescribeTableColumn[$Database][$Table][$Row['COLUMN_NAME']]))){
+          $DescribeTableColumn[$Database][$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']]=array();
         }
-        $DescribeTableColumn[$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']][]=$Row;
+        $DescribeTableColumn[$Database][$Table][$Row['COLUMN_NAME']][$Row['CONSTRAINT_TYPE']][]=$Row;
       }
     }
     
-    if(!(isset($DescribeTableColumn[$Table][$Column]))){
+    if(!(isset($DescribeTableColumn[$Database][$Table][$Column]))){
       return false;
     }else{
-      return $DescribeTableColumn[$Table][$Column];
+      return $DescribeTableColumn[$Database][$Table][$Column];
     }
   }
   
