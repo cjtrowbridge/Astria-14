@@ -251,7 +251,7 @@ class RDB{
     $Data  = $this->getTopRows($Table, $Count);
     
     //Rewrite all the cell contents to include links for keys, etc.
-    $Table = $this->Legba->ArrTabler($Data, 'table tablesorter tablesorter-ice tablesorter-bootstrap', 'OutputTable', true, array($this, 'TableCellOutputHandler',$Table) );
+    $Data = $this->Legba->ArrTabler($Data, 'table tablesorter tablesorter-ice tablesorter-bootstrap', 'OutputTable', true, array($this, 'TableCellOutputHandler',$Table) );
     
     $Contents.='
         <div class="col-12">
@@ -260,7 +260,7 @@ class RDB{
             <a href="javascript:void(0);" class="text-muted" onclick="$(\'#Search\').slideDown(\'fast\');">Search</a> - 
             <a href="/schema/'.$Database.'/'.$Table.'/?show=100" class="text-muted">Show More</a>
           </div
-          '.$Table.'
+          '.$Data.'
         </div>
         
       </div>
