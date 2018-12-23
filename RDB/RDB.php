@@ -280,8 +280,16 @@ class RDB{
       $DescribeTableColumn = array();
     }
     if(!(isset($DescribeTableColumn[$Table]))){
-      $Data = $this->getTableColumnDescriptions($Table);
       $DescribeTableColumn[$Table] = array();
+      
+      $Data = $this->getTableColumnDescriptions($Table);
+      foreach($Data as $Column){
+        $DescribeTableColumn[$Table][$Column['COLUMN_NAME']]=$Column;
+      }
+      
+      
+      $Data = $this->getTableColumnKeyDescriptions($Table);
+      
       foreach($Data as $Row){
         //If this column is not yet listed in the cached table array, create it.
         if(!(isset($DescribeTableColumn[$Table][$Row['COLUMN_NAME']]))){
@@ -309,6 +317,21 @@ class RDB{
   }
   
   public function getTableColumnDescriptions($Table){
+    $Database = $this->Credentials['Database'];
+    $this->ValidateTable($Table);  
+    $SQL = "
+      SELECT TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,DATA_TYPE,IS_NULLABLE,COLUMN_DEFAULT 
+      FROM information_schema.COLUMNS 
+      WHERE 
+        TABLE_SCHEMA = '".$Database."' AND
+        TABLE_NAME = '".$Table."'
+    ";
+    $Data = $this->Query($SQL);
+    return $Data;
+  }
+    
+    
+  public function getTableColumnKeyDescriptions($Table){
     
     $Database = $this->Credentials['Database'];
     $this->ValidateTable($Table);
