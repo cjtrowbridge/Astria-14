@@ -276,9 +276,9 @@ class RDB{
   public function TableCellOutputHandler($Key, $Value, $Row){
     $Output = '';
     
-    $Output.= "Key: ".$Key.'<br>';
-    $Output.= "Value: ".$Value.'<br>';
-    $Output.= "Row: ".$Row.'<br>';
+    $this->Legba->pd($Key);
+    $this->Legba->pd($Value);
+    $this->Legba->pd($Row);
     
     return $Output;
   }
