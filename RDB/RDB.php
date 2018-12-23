@@ -276,9 +276,7 @@ class RDB{
   public function TableCellOutputHandler($Key, $Value, $Row){
     $Output = '';
     
-    $this->Legba->pd($Key);
-    $this->Legba->pd($Value);
-    $this->Legba->pd($Row);
+    $Output.= $Value;
     
     return $Output;
   }
