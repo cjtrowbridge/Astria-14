@@ -110,13 +110,11 @@ class RDB{
     
     global $DescribeTableColumn;
     if(isset($DescribeTableColumn[$Database])){
-      
-      $this->Legba->pd($DescribeTableColumn[$Database]);
-      
       $Output = array();
       foreach($DescribeTableColumn[$Database] as $Key => $Value){
         $Output[]=$Value;
       }
+      $this->Legba->pd($Output);
       return $Output;
     }else{
       switch($this->Type){
@@ -129,6 +127,7 @@ class RDB{
               $DescribeTableColumn[$Database][$Value]=array();
             }
           }
+          $this->Legba->pd($Tables);
           return $Tables;
         default:
           die('Invalid Database Type: '.$this->Type);
