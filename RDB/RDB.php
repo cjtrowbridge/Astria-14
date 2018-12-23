@@ -226,9 +226,9 @@ class RDB{
     $this->DescribeTable($Table);
   }
   public function DescribeTable($Table){
-    if(!(in_array($Table,$this->ListTables()))){
-      die('Describe Invalid Table: '.$Table);
-    }
+    $this->ValidateTable($Table);
+    //TODO add permission check here
+    
     $Database = $this->Credentials['Database'];
     
     $Contents=' <div class="container">
@@ -258,7 +258,7 @@ class RDB{
           <h2>Top '.$Count.' Rows</h2>
           <div>
             <a href="javascript:void(0);" class="text-muted" onclick="$(\'#Search\').slideDown(\'fast\');">Search</a> - 
-            <a href="./?show=100" class="text-muted">Show More</a>
+            <a href="/schema/'.$Database.'/?show=100" class="text-muted">Show More</a>
           </div
           '.$Table.'
         </div>
