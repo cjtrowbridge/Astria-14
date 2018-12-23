@@ -1,5 +1,7 @@
 <?php
 
+global $BEGIN;
+$BEGIN = microtime(true);
 
 //Legba is a modular part of Astria which manages users, groups, sessions, permissions, configuration, database connections, and events. These are most of the core Astria features.
 include('Legba/Legba.php');
