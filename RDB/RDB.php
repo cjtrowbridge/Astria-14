@@ -311,7 +311,7 @@ class RDB{
   public function getTableColumnDescriptions($Table){
     
     $Database = $this->Credentials['Database'];
-    ValidateTable($Table);
+    $this->ValidateTable($Table);
     
     $SQL="
       SELECT COLUMN_NAME, CONSTRAINT_TYPE, REFERENCED_COLUMN_NAME, REFERENCED_TABLE_NAME
