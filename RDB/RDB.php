@@ -258,7 +258,7 @@ class RDB{
           <h2>Top '.$Count.' Rows</h2>
           <div>
             <a href="javascript:void(0);" class="text-muted" onclick="$(\'#Search\').slideDown(\'fast\');">Search</a> - 
-            <a href="/schema/'.$Database.'/?show=100" class="text-muted">Show More</a>
+            <a href="/schema/'.$Database.'/'.$Table.'/?show=100" class="text-muted">Show More</a>
           </div
           '.$Table.'
         </div>
