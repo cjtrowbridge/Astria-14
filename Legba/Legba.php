@@ -185,7 +185,7 @@ class Legba{
             if(is_array($OutputCallback)){
               //Include anything passed in such as a resource for the database handler.
               $Array = array();
-              foreach($OutputHandler as $Key => $Value){
+              foreach($OutputCallback as $Key => $Value){
                 $Array[$Key]=$Value;
               }
               //Include the information about this cell and its row and column.
