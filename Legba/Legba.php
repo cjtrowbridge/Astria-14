@@ -625,6 +625,7 @@ class Legba{
     $Template = str_replace('<!--TITLE-->',$Title,$Template);
     $Template = str_replace('<!--CONTENTS-->',$Contents,$Template);
     $Template = str_replace('<!--Top Nav-->',  $this->UserTopNav(),       $Template);
+    $Template = str_replace('<!--FOOTER-->',   $this->UserFooterContents(), $Template);
     echo $Template;
     $this->Event('end');
     exit;
