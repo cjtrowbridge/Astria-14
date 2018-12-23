@@ -186,6 +186,7 @@ class Legba{
               
               $CallbackInstance = $OutputCallback[0];
               $CallbackMethod   = $OutputCallback[1];
+              $Table            = $OutputCallback[2];
                 
               //Call the callback with all these things included.
               $return.= call_user_func_array(
@@ -198,7 +199,8 @@ class Legba{
                 array(
                   $key,
                   $value, 
-                  $row
+                  $row,
+                  $Table
                 )
               );
             }else{
