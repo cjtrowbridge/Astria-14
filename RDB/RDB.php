@@ -358,14 +358,30 @@ class RDB{
   }
   
   public function TableCellOutputHandler($Key, $Value, $Row, $Table){
+    $Database = $this->Credentials['Database'];
+    $this->ValidateTable($Table);
+    $this->ValidateTableColummn($Key);
     $Column = $this->DescribeTableColumn($Table, $Key);
+    $ModifiedOutput = '';
+    $Output= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
+    if(isset($Column['PRIMARY_KEY'])){
+      //TODO add support for multi-column primary keys.
+      $ModifiedOutput='<a href=""></a>';
+    }
+    isset($Column['FOREIGN_KEY']){
+      //TODO This should probably not be indexed.
+      $ForeignTable  = $Column['FOREIGN_KEY'][0]['REFERENCED_TABLE_NAME'];
+      $ForeignColumn = $Column['FOREIGN_KEY'][0]['REFERENCED_COLUMN_NAME'];
+      $ModifiedOutput='<a href="/'.$Database.'/'.$ForeignTable.'/?'.$ForeignColumn.'='.$Value.'">'.$Value.'</a>';
+    }
     
-    $Output = '';
     
-    $Output.= '<span title="Column: '.PHP_EOL.var_export($Column,true).'Row: '.PHP_EOL.var_export($Row,true).'">';
-    $Output.= $Value;
+    if($ModifiedOutput==''){
+      $Output.= $ModifiedOutput;
+    }else{
+      $Output.= $Value;
+    }
     $Output.= '</span>';
-    
     return $Output;
   }
 }
