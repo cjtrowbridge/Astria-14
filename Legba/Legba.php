@@ -752,12 +752,30 @@ class Legba{
   function CurrentRuntime($Precision = 3){
     global $BEGIN;
     $Ret = microtime(true)-$BEGIN;
-    $Ret = round($Ret,$Precision);
+    $Val = round($Ret,$Precision);
+    $Ret = $Val.' seconds.';
+    
+    //TODO make these threshholds configurable
+    if($Val > .1){
+      $Ret = '<span class="text-danger">'.$Ret.'</span>';
+    }else{
+      $Ret = '<span class="text-success">'.$Ret.'</span>';
+    }
+    
     return $Ret;
   }
   function CurrentRam($Precision = 3){
     $Ret = memory_get_usage() / 1000000;
-    $Ret = round($Ret,$Precision);
+    $Val = round($Ret,$Precision);
+    $Ret = $Ret.' megabytes.';
+    
+    //TODO make these threshholds configurable
+    if($Val > 3){
+      $Ret = '<span class="text-danger">'.$Ret.'</span>';
+    }else{
+      $Ret = '<span class="text-success">'.$Ret.'</span>';
+    }
+    
     return $Ret;
   }
   public function GetPageFromTemplate($File){
