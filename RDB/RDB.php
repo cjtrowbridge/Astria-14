@@ -311,7 +311,10 @@ class RDB{
       $this->ListTables();
     }
     
-    if(!(isset($DescribeTableColumn[$Database][$Table]))){
+    if(
+      (!(isset($DescribeTableColumn[$Database][$Table])))||
+      count($DescribeTableColumn[$Database][$Table])==0
+    ){
       $DescribeTableColumn[$Database][$Table] = array();
       
       $Data = $this->getTableColumnDescriptions($Table);
