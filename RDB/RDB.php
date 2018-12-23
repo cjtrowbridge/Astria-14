@@ -183,6 +183,9 @@ class RDB{
     }
     switch($this->Type){
       case 'mysql':
+        if($this->Legba->MayI('Show All Queries as Events')){
+          $this->Legba->Event($SQL);
+        }
         $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
         $QUERIES_RUN++;
         if(is_bool($Result)){
