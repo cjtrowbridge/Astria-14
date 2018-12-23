@@ -183,17 +183,24 @@ class Legba{
             $return.= "<td>";
             
             if(is_array($OutputCallback)){
-              //Include anything passed in such as a resource for the database handler.
-              $Array = array();
-              for($i = 2; $i <= count($OutputCallback); $i++){
-                echo $i;
-              }
-              //Include the information about this cell and its row and column.
-              $Array[]=$key;
-              $Array[]=$value;
-              $Array[]=$row;
+              
+              $CallbackInstance = $OutputCallback[0];
+              $CallbackMethod   = $OutputCallback[1];
+                
               //Call the callback with all these things included.
-              $return.= call_user_func_array(array($OutputCallback[0],$OutputCallback[1]), $Array);
+              $return.= call_user_func_array(
+                //passed in info about the instance and method that will handle the cells' contents
+                array(
+                  $CallbackInstance, 
+                  $CallbackMethod
+                ), 
+                //data about the cell and its row and columns to pass back to the instance method
+                array(
+                  $key,
+                  $value, 
+                  $row
+                )
+              );
             }else{
               $return.= "Unknown Handler Passed.";
             }
