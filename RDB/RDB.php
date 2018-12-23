@@ -177,9 +177,14 @@ class RDB{
   
   //Run a query
   public function Query($SQL){
+    global $QUERIES_RUN;
+    if(!(isset($QUERIES_RUN))){
+      $QUERIES_RUN=0;
+    }
     switch($this->Type){
       case 'mysql':
         $Result = mysqli_query($this->Resource, $SQL) or die(mysqli_error($this->Resource));
+        $QUERIES_RUN++;
         if(is_bool($Result)){
           return $Result;
         }
