@@ -96,6 +96,9 @@ class Mercury{
     return $this->API['Type'];
   }
   
+  public function ListEndpoints(){
+    return $this->API['Endpoints'];
+  }
   public function DescribeAPI(){
     $API = $this->API['Name'];
     $Contents=' <div class="container">
