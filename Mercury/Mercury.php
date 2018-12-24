@@ -52,7 +52,14 @@ class Mercury{
       'Name' => $this->Legba->Config( $ConfigPath, 'Name' ),
       'Root' => $this->Legba->Config( $ConfigPath, 'Root' ),
       'Type' => strtolower($this->Legba->Config( $ConfigPath, 'Type' ))
+      
     );
+    
+    if($this->Legba->Config( $ConfigPath, 'Endpoints' )==false){
+      $this->Legba->SaveConfig( $ConfigPath, 'Endpoints', array('Root' => $thi->API['Root']) );
+    }else{
+      'Endpoints' => $this->Legba->Config( $ConfigPath, 'Endpoints' );
+    }
     
     
     switch($this->API['Type']){
