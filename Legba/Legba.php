@@ -706,7 +706,7 @@ class Legba{
           ';
           foreach($M as $Key => $Value){
             $Output.='
-            <a class="dropdown-item" href="/api/'.$Value.'">'$Value.'</a>
+            <a class="dropdown-item" href="/api/'.$Value.'">'.$Value.'</a>
             ';
           }
           $Output.='
