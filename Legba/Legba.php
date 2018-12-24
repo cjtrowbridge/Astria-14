@@ -691,6 +691,31 @@ class Legba{
     ';
     $Output.=$this->UserTopNavSchemaObjectsDropdown();
     
+    
+    
+    global $Mercuries;
+    $M = $Mercuries->ListMercuries();
+    
+    if($this->Route(0)==false){
+      $Output.='
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="apiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          API
+        </a>
+        <div class="dropdown-menu" aria-labelledby="apiDropdown">
+          ';
+          foreach($M as $Key => $Value){
+            $Output.='
+            <a class="dropdown-item" href="/api/'.$Value.'">'$Value.'</a>
+            ';
+          }
+          $Output.='
+        </div>
+      </li>
+      ';
+    }
+    
+    
     return $Output;
   }
   public function UserTopNavSchemaObjectsDropdown(){
