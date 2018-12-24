@@ -88,4 +88,28 @@ class Mercury{
   public function Type(){
     return $this->API['Type'];
   }
+  
+  public function DescribeAPI(){
+    $API = $this->API['Name'];
+    $Contents=' <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>API '.$API.'</h1>
+          <h2>Endpoints:</h2>
+          <ul>
+            ';
+      $Endpoints = $this->ListEndpoints();
+      foreach($Endpoints as $Key => $Value){
+        $Contents.='
+              <li><a href="/api/'.$API.'/'.$Value.'/">'.$Value.'</a></li>
+        ';
+      }
+      $Contents.=' 
+          </ul>
+        </div>
+      </div>
+    </div>
+    ';
+    $this->Legba->SimpleUserPage($Contents, $API.' API');
+  }
 }
