@@ -49,8 +49,8 @@ class Mercury{
     }
     
     $this->API = array(
-      'Name' => $this->Legba->Config( $ConfigPath, 'Name' )
-      'Root' => $this->Legba->Config( $ConfigPath, 'Root' )
+      'Name' => $this->Legba->Config( $ConfigPath, 'Name' ),
+      'Root' => $this->Legba->Config( $ConfigPath, 'Root' ),
       'Type' => strtolower($this->Legba->Config( $ConfigPath, 'Type' ))
     );
     
