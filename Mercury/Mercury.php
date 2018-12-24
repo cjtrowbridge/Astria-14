@@ -4,24 +4,88 @@
   
   Mercury 1.0
   
-  The purpose of this astria module is to facilitate procedural interfaces for JSON GET/POST and web GET/POST interfaces for databases.
+  General purpose web front-end for JSON APIs.
   
-  The idea is that these interfaces are configured using very simple permissions structures which are then translated into json or web pages containing forms, data, or visualisations.
-  
-  It needs to be relatively simple to use a single process to create different versions of the same route based on the permissions or a particular user or their group, versus creating an open public page with the same kind of data.
-  
-  Example use cases;
-    -A survey page which anyone can fill out, where the same site also has secure admin pages for analytics.
-    -A CRM where everything is secure, and every user has different access to the data.
-    -A multi-company CRM where multiple organizations have access to different versions of the same data.
-    -A purely JSON GET/POST API which works only with a native app.
-  
+  This tool allows APIs to be fetched, interpreted, and displayed. Endpoints are mapped to routes which allows simple web navigation through the data the API provides.
+
 */
 
+global $Mercuries;
+$Mercuries = new Mercuries();
+class Mercuries{
+  private $A = array();
+  public function ListMercuries(){
+    $Output = array();
+    foreach($this->A as $Name => $Resource){
+      //TODO eventually the key should be an editable alias
+      $Output[$Name]=$Name;
+    }
+    return $Output;
+  }
+  public function getMercury($Name){
+    if(isset($this->A[$Name])){
+      return $this->A[$Name];
+    }else{
+      return false;
+    }
+  }
+  public function add($Name,$Resource){
+    $this->A[$Name]=$Resource;
+  }
+  
+}
 class Mercury{
   
-  function __construct(){
+  Private $Legba = false;
+  private $API = false;
+  
+  function __construct(&$L, $ConfigPath){
+    
+    $this->Legba = $L;
+    
+    if(!(file_exists($ConfigPath))){
+      //TODO maybe this should not be a fatal error?
+      die('Invalid Mercury Configuration File: '.$ConfigPath);
+    }
+    
+    $this->API = array(
+      'Name' => $this->Legba->Config( $ConfigPath, 'Name' )
+      'Root' => $this->Legba->Config( $ConfigPath, 'Root' )
+      'Type' => strtolower($this->Legba->Config( $ConfigPath, 'Type' ))
+    );
+    
+    
+    switch($this->Type){
+      
+      case 'json':
+        
+        break;
+        
+      default:
+        die('Invalid Database Type: '.$this->Type);
+      
+    }
+    
+    //Load the route for description of this schema
+    //TODO this should eventually reference the user's permissions.
+    //TODO also the api should be renamable with some kind of alias instead of using just its name.
+    $Event = 'Logged In - Show Content';
+    $Route = 'api/'.$this->API['Name'];
+    $this->Legba->Hook($Event, $Route, array($this,'DescribeAPI') );
+    /*
+    foreach($this->List() as $Endpoint){
+      $Route = 'api/'.$this->API['Name'].'/'.$Endpoint;
+      $this->Legba->Hook($Event, $Route, array($this,'DescribeThisTable') );
+    }
+    */
+    //Add to listener
+    global $Mercuries;
+    $Mercuries->add($this->API['Name'],$this);
     
   }
   
+  //Return the Type of this API
+  public function Type(){
+    return $this->API['Type'];
+  }
 }
