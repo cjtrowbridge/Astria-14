@@ -113,6 +113,7 @@ class Mercury{
         $Contents.='
               <li><a href="/api/'.$API.'/'.$Value.'/">'.$Value.'</a></li>
         ';
+        $this->Legba->Event('Adding dropdown item for API: '.$Value);
       }
       $Contents.=' 
           </ul>
