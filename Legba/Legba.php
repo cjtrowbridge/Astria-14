@@ -696,7 +696,10 @@ class Legba{
     global $Mercuries;
     $M = $Mercuries->ListMercuries();
     
-    if($this->Route(0)==false){
+    if(
+      ($this->Route(0)==false)||
+      ($this->Route(0)=='api')
+    ){
       $Output.='
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="apiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
