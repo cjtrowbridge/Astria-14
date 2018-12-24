@@ -58,7 +58,7 @@ class Mercury{
     if($this->Legba->Config( $ConfigPath, 'Endpoints' )==false){
       $this->Legba->SaveConfig( $ConfigPath, 'Endpoints', array('Root' => $thi->API['Root']) );
     }else{
-      'Endpoints' => $this->Legba->Config( $ConfigPath, 'Endpoints' );
+      $this->API['Endpoints'] = $this->Legba->Config( $ConfigPath, 'Endpoints' );
     }
     
     
