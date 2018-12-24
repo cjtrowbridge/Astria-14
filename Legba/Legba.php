@@ -701,10 +701,7 @@ class Legba{
       ($this->Route(0)  == 'schema') &&
       (!($this->Route(1) === false))
     )){
-      return '<!--Select a schema to view list of objects
-      Route(0): '.$this->Route(0).'
-      Route(1): '.$this->Route(1).'
-      -->';
+      return '<!--Select a schema to view list of objects-->'.PHP_EOL;
     }
     
     global $Schemas;
