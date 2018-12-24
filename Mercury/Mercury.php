@@ -55,14 +55,14 @@ class Mercury{
     );
     
     
-    switch($this->Type){
+    switch($this->API['Type']){
       
       case 'json':
         
         break;
         
       default:
-        die('Invalid Database Type: '.$this->Type);
+        die('Invalid API Type: '.$this->API['Type']);
       
     }
     
