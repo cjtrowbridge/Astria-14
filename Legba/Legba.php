@@ -663,43 +663,50 @@ class Legba{
   public function UserTopNav(){
     $Output='';
     
-    global $Schemas;
-    $S = $Schemas->ListSchemas();
-    $Output.='  <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Database
-        </a>
-        <div class="dropdown-menu" aria-labelledby="schemaDropdown">
-          ';
-    $ShownObjects = 0;
-    foreach($S as $Key => $Database){
-      if($this->MayI('View Database Object '.$Database)){
-        //TODO these database names should be displayed as a configurable alias
-    $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'">'.$Key.'</a>
-';
-        $ShownObjects++;
+    
+        
+    if(
+      ($this->Route(0)==false)||
+      ($this->Route(0)=='schema')
+    ){
+      global $Schemas;
+      $S = $Schemas->ListSchemas();
+      $Output.='  <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Database
+          </a>
+          <div class="dropdown-menu" aria-labelledby="schemaDropdown">
+            ';
+      $ShownObjects = 0;
+      foreach($S as $Key => $Database){
+        if($this->MayI('View Database Object '.$Database)){
+          //TODO these database names should be displayed as a configurable alias
+      $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'">'.$Key.'</a>
+  ';
+          $ShownObjects++;
+        }
       }
+      if($ShownObjects==0){
+        $Output.='    <a class="dropdown-item" href="#">You do not have permission to view any databases.</a>
+  ';
+      }
+      $Output.='
+          </div>
+        </li>
+
+      ';
+      $Output.=$this->UserTopNavSchemaObjectsDropdown();
     }
-    if($ShownObjects==0){
-      $Output.='    <a class="dropdown-item" href="#">You do not have permission to view any databases.</a>
-';
-    }
-    $Output.='
-        </div>
-      </li>
-      
-    ';
-    $Output.=$this->UserTopNavSchemaObjectsDropdown();
     
     
     
-    global $Mercuries;
-    $M = $Mercuries->ListMercuries();
     
     if(
       ($this->Route(0)==false)||
       ($this->Route(0)=='api')
     ){
+      global $Mercuries;
+      $M = $Mercuries->ListMercuries();
       $Output.='
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="apiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
