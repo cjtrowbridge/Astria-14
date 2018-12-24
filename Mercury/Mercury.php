@@ -109,6 +109,7 @@ class Mercury{
           <ul>
             ';
       $Endpoints = $this->ListEndpoints();
+      $this->Legba->pd($Endpoints);
       foreach($Endpoints as $Key => $Value){
         $Contents.='
               <li><a href="/api/'.$API.'/'.$Value.'/">'.$Value.'</a></li>
