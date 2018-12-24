@@ -109,10 +109,9 @@ class Mercury{
           <ul>
             ';
       $Endpoints = $this->ListEndpoints();
-      $this->Legba->pd($Endpoints);
       foreach($Endpoints as $Key => $Value){
         $Contents.='
-              <li><a href="/api/'.$API.'/'.$Value.'/">'.$Value.'</a></li>
+              <li><a href="/api/'.$API.'/'.$Value.'/">'.$Key.': '.$Value.'</a></li>
         ';
         $this->Legba->Event('Adding dropdown item for API: '.$Value);
       }
