@@ -235,7 +235,7 @@ class RDB{
       </div>
     </div>
     ';
-    $this->Legba->SimpleUserPage($Contents, 'Astria://'.$Database.'/');
+    $this->Legba->SimpleUserPage($Contents, $Database.' Database');
   }
   
   //Describe a table within this schema
