@@ -630,7 +630,7 @@ class Legba{
     $Template = str_replace('<!--Application Name-->', $ApplicationName,$Template);
     $Template = str_replace('<!--TITLE-->',    $Title, $Template);
     $Template = str_replace('<!--TOP NAV-->',  $this->UserTopNav().'<!--TOP NAV-->',        $Template);
-    $Template = str_replace('<!--CONTENTS-->', $this->UserHomeContents().'<!--CONTENTS-->', $Template);
+    $Template = str_replace('<!--CONTENTS-->', $Contents.'<!--CONTENTS-->', $Template);
     $Template = str_replace('<!--FOOTER-->',   $this->UserFooterContents().'<!--FOOTER-->', $Template);
     echo $Template;
     $this->Event('end');
