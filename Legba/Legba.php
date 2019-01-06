@@ -540,8 +540,11 @@ class Legba{
     if($this->Config('Legba/Pages/Config.php','Use Legba Public Home Page',true) == true){
       $this->Hook('Not Logged In - Show Content', '/', '$this->DefaultPage_PublicHome();');
     }
-    if($this->Config('Legba/Pages/Config.php','Use Legba 404',true) == true){
-      $this->Hook('404', '/', '$this->DefaultPage_404();');
+    if($this->Config('Legba/Pages/Config.php','Use Legba Logged In 404',true) == true){
+      $this->Hook('Logged In - 404', '/', '$this->DefaultPage_404();');
+    }
+    if($this->Config('Legba/Pages/Config.php','Use Legba Not Logged In 404',true) == true){
+      $this->Hook('Not Logged In - 404', '/', '$this->DefaultPage_404();');
     }
     
     $this->Event('Done hooking default pages onto routes as configured...');
