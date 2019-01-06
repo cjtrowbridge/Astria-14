@@ -560,7 +560,7 @@ class Legba{
   }
   
   //Default Pages
-  public function Default_404(){
+  public function DefaultPage_404(){
     header("HTTP/1.0 404 Not Found");
     $Title = $this->Application('Default Page Title','Astria 14');
     $File = 'Legba/Pages/404.html';
