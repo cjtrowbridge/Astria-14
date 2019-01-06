@@ -671,31 +671,33 @@ class Legba{
     ){
       global $Schemas;
       $S = $Schemas->ListSchemas();
-      $Output.='  <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Database
-          </a>
-          <div class="dropdown-menu" aria-labelledby="schemaDropdown">
-            ';
-      $ShownObjects = 0;
-      foreach($S as $Key => $Database){
-        if($this->MayI('View Database Object '.$Database)){
-          //TODO these database names should be displayed as a configurable alias
-      $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'">'.$Key.'</a>
-  ';
-          $ShownObjects++;
+      if(count($S)>0){
+        $Output.='  <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="schemaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Database
+            </a>
+            <div class="dropdown-menu" aria-labelledby="schemaDropdown">
+              ';
+        $ShownObjects = 0;
+        foreach($S as $Key => $Database){
+          if($this->MayI('View Database Object '.$Database)){
+            //TODO these database names should be displayed as a configurable alias
+        $Output.='    <a class="dropdown-item" href="/schema/'.$Database.'">'.$Key.'</a>
+    ';
+            $ShownObjects++;
+          }
         }
-      }
-      if($ShownObjects==0){
-        $Output.='    <a class="dropdown-item" href="#">You do not have permission to view any databases.</a>
-  ';
-      }
-      $Output.='
-          </div>
-        </li>
+        if($ShownObjects==0){
+          $Output.='    <a class="dropdown-item" href="#">You do not have permission to view any databases.</a>
+    ';
+        }
+        $Output.='
+            </div>
+          </li>
 
-      ';
-      $Output.=$this->UserTopNavSchemaObjectsDropdown();
+        ';
+        $Output.=$this->UserTopNavSchemaObjectsDropdown();
+      }
     }
     
     
@@ -707,22 +709,24 @@ class Legba{
     ){
       global $Mercuries;
       $M = $Mercuries->ListMercuries();
-      $Output.='
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="apiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          API
-        </a>
-        <div class="dropdown-menu" aria-labelledby="apiDropdown">
-          ';
-          foreach($M as $Key => $Value){
-            $Output.='
-            <a class="dropdown-item" href="/api/'.$Value.'">'.$Value.'</a>
+      if(count($M)>0){
+        $Output.='
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="apiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            API
+          </a>
+          <div class="dropdown-menu" aria-labelledby="apiDropdown">
             ';
-          }
-          $Output.='
-        </div>
-      </li>
-      ';
+            foreach($M as $Key => $Value){
+              $Output.='
+              <a class="dropdown-item" href="/api/'.$Value.'">'.$Value.'</a>
+              ';
+            }
+            $Output.='
+          </div>
+        </li>
+        ';
+      }
     }
     
     
