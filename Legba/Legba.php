@@ -407,7 +407,7 @@ class Legba{
     //The Callback should be hooked onto the event only when the specified route matches the current route, or 'Any.'
     if(
       $Route !== $_GET['route'] &&
-      $Route !== 'Any'
+      $Route !== 'Any/'
     ){
        $this->Event("Hook: Skipped Because Of Route Mismatch '".$Route."'... Curent Route Is: ".$_GET['route']);
       return false;
