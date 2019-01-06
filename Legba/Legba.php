@@ -540,6 +540,9 @@ class Legba{
     if($this->Config('Legba/Pages/Config.php','Use Legba Public Home Page',true) == true){
       $this->Hook('Not Logged In - Show Content', '/', '$this->DefaultPage_PublicHome();');
     }
+    if($this->Config('Legba/Pages/Config.php','Use Legba 404',true) == true){
+      $this->Hook('404', '/', '$this->DefaultPage_404();');
+    }
     
     $this->Event('Done hooking default pages onto routes as configured...');
   }
@@ -554,6 +557,19 @@ class Legba{
   }
   
   //Default Pages
+  public function Default_404(){
+    header("HTTP/1.0 404 Not Found");
+    $Title = $this->Application('Default Page Title','Astria 14');
+    $File = 'Legba/Pages/404.html';
+    $this->Event('Showing Page From Template: '.$File);
+    $Template = $this->GetPageFromTemplate($File);
+    $Template = str_replace('<!--TITLE-->',    $Title, $Template);
+    $Template = str_replace('<!--CONTENTS-->', $Contents.'<!--CONTENTS-->', $Template);
+    $Template = str_replace('<!--FOOTER-->',   $this->UserFooterContents().'<!--FOOTER-->', $Template);
+    echo $Template;
+    $this->Event('end');
+    exit;
+  }
   public function DefaultPage_PublicHome(){
     //Show public home page from template
     
