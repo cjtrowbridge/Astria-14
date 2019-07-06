@@ -317,7 +317,13 @@ class Legba{
     //Save the file.
     $ConfigFile = serialize($ConfigFile);
     $ConfigFile = '<?php $ConfigFile = unserialize(\''.$ConfigFile.'\');';
-    $Ret = file_put_contents($File, $ConfigFile);
+    
+    $Ret = false;
+    if(
+      $Ret = file_put_contents($File, $ConfigFile);
+    ){
+      throw new Exception("Don't have write permission.");
+    }
     if($Ret){
       $this->Event('Succeeded Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     }else{
