@@ -896,10 +896,8 @@ class Legba{
         $this->ValidateUser($_POST['inputEmail'],'Administrator');
       }else{
         //TODO database lookup
-        //die('Invalid User');
         //TODO log failed attempts and ban IPs
-        header('/login?message='.urlencode('Invalid Login.'));
-        exit;
+        die('Invalid Login');
       }
     }
     header('Location: /');
