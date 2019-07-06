@@ -323,6 +323,8 @@ class Legba{
       $Ret = file_put_contents($File, $ConfigFile)
     ){
       throw new Exception("Don't have write permission.");
+    }catch (Exception $e) {
+      echo 'Caught exception: ',  $e->getMessage(), "\n";
     }
     if($Ret){
       $this->Event('Succeeded Saving Config File: "'.$File.'" and Key "'.$Key.'"');
