@@ -898,7 +898,7 @@ class Legba{
         //TODO database lookup
         //die('Invalid User');
         //TODO log failed attempts and ban IPs
-        header('/login?message='.url_encode('Invalid Login.'));
+        header('/login?message='.urlencode('Invalid Login.'));
         exit;
       }
     }
