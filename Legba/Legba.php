@@ -320,10 +320,11 @@ class Legba{
     
     $Ret = false;
     try{
-      $Ret = file_put_contents($File, $ConfigFile)
-    }catch (Exception $e) {
+      $Ret = file_put_contents($File, $ConfigFile);
+    }catch(Exception $e){
       echo 'Caught exception: ',  $e->getMessage(), "\n";
     }
+    
     if($Ret){
       $this->Event('Succeeded Saving Config File: "'.$File.'" and Key "'.$Key.'"');
     }else{
