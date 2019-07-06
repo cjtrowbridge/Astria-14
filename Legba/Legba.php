@@ -320,7 +320,7 @@ class Legba{
     
     $Ret = false;
     if(
-      $Ret = file_put_contents($File, $ConfigFile);
+      $Ret = file_put_contents($File, $ConfigFile)
     ){
       throw new Exception("Don't have write permission.");
     }
